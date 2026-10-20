@@ -1,0 +1,3505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Listen Up · English Listening Trainer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #0D1117;
+  --surface:  #161B24;
+  --card:     #1C2333;
+  --border:   #2A3448;
+  --border2:  #3A4A68;
+  --ink:      #E6EDF3;
+  --muted:    #7D8FA8;
+  --dim:      #4A5568;
+  --wave:     #00D9FF;
+  --green:    #39D98A;
+  --red:      #FF6B6B;
+  --amber:    #FFB347;
+  --purple:   #A78BFA;
+  --arabic:   #FFE5A0;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+}
+
+/* ── HERO ────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 2rem;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse 70% 50% at 50% 0%, #00D9FF12 0%, transparent 70%);
+}
+
+.hero-eyebrow {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--wave);
+  margin-bottom: 1.5rem;
+  opacity: .8;
+}
+
+.hero-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 700;
+  line-height: .95;
+  letter-spacing: -.03em;
+  color: var(--ink);
+  margin-bottom: .6rem;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--wave);
+}
+
+.hero-sub {
+  font-size: 1rem;
+  color: var(--muted);
+  font-weight: 300;
+  max-width: 440px;
+  line-height: 1.6;
+  margin-bottom: .4rem;
+}
+
+.hero-arabic {
+  font-family: 'Noto Naskh Arabic', serif;
+  font-size: 1.1rem;
+  color: var(--arabic);
+  direction: rtl;
+  margin-bottom: 2.5rem;
+  opacity: .85;
+}
+
+/* Waveform animation */
+.waveform {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 3rem;
+  height: 48px;
+}
+.waveform span {
+  display: block;
+  width: 4px;
+  border-radius: 2px;
+  background: var(--wave);
+  opacity: .35;
+  animation: wave 1.4s ease-in-out infinite;
+}
+.waveform span:nth-child(1)  { height: 12px; animation-delay: 0s; }
+.waveform span:nth-child(2)  { height: 28px; animation-delay: .1s; }
+.waveform span:nth-child(3)  { height: 40px; animation-delay: .2s; }
+.waveform span:nth-child(4)  { height: 20px; animation-delay: .3s; }
+.waveform span:nth-child(5)  { height: 36px; animation-delay: .4s; }
+.waveform span:nth-child(6)  { height: 48px; animation-delay: .5s; }
+.waveform span:nth-child(7)  { height: 32px; animation-delay: .4s; }
+.waveform span:nth-child(8)  { height: 44px; animation-delay: .3s; }
+.waveform span:nth-child(9)  { height: 20px; animation-delay: .2s; }
+.waveform span:nth-child(10) { height: 36px; animation-delay: .1s; }
+.waveform span:nth-child(11) { height: 14px; animation-delay: 0s; }
+
+@keyframes wave {
+  0%, 100% { transform: scaleY(1); opacity: .35; }
+  50%       { transform: scaleY(1.6); opacity: .9; }
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  background: var(--wave);
+  color: #000;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: .9rem;
+  letter-spacing: .02em;
+  padding: .75rem 1.8rem;
+  border-radius: 3rem;
+  text-decoration: none;
+  transition: opacity .2s, transform .2s;
+}
+.hero-cta:hover { opacity: .85; transform: translateY(-2px); }
+
+/* ── NAV ─────────────────────────────────────── */
+.level-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(13,17,23,.95);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  padding: .75rem 1.5rem;
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  overflow-x: auto;
+}
+.level-nav::-webkit-scrollbar { display: none; }
+
+.level-label {
+  font-size: .72rem;
+  color: var(--dim);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  margin-right: .5rem;
+  flex-shrink: 0;
+}
+
+.lvl-btn {
+  flex-shrink: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: .78rem;
+  font-weight: 500;
+  padding: .4rem .9rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all .2s;
+  white-space: nowrap;
+}
+.lvl-btn:hover { border-color: var(--wave); color: var(--wave); }
+.lvl-btn.active { background: var(--wave); color: #000; border-color: var(--wave); }
+
+/* ── MAIN ────────────────────────────────────── */
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 5rem;
+}
+
+.section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--wave);
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border2), transparent);
+}
+
+/* ── LESSON CARD ─────────────────────────────── */
+.lesson-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1.1rem;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  transition: border-color .2s;
+}
+.lesson-card:hover { border-color: var(--border2); }
+
+.lesson-header {
+  padding: 1.4rem 1.6rem 1rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.lesson-meta {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  flex-wrap: wrap;
+  margin-bottom: .5rem;
+}
+
+.badge {
+  font-size: .65rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .2rem .6rem;
+  border-radius: 1rem;
+  border: 1px solid;
+}
+.badge-a1  { color: #39D98A; border-color: #39D98A44; background: #39D98A11; }
+.badge-a2  { color: #6EE7B7; border-color: #6EE7B744; background: #6EE7B711; }
+.badge-b1  { color: #60A5FA; border-color: #60A5FA44; background: #60A5FA11; }
+.badge-b2  { color: #A78BFA; border-color: #A78BFA44; background: #A78BFA11; }
+.badge-topic { color: var(--muted); border-color: var(--border); background: var(--surface); }
+
+.lesson-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.lesson-arabic {
+  font-family: 'Noto Naskh Arabic', serif;
+  font-size: .9rem;
+  color: var(--arabic);
+  direction: rtl;
+  margin-top: .25rem;
+  opacity: .8;
+}
+
+/* ── PLAYER ──────────────────────────────────── */
+.player {
+  padding: 1.4rem 1.6rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.player-text {
+  font-size: .95rem;
+  line-height: 1.85;
+  color: var(--ink);
+  margin-bottom: 1.2rem;
+  padding: 1rem 1.2rem;
+  background: var(--bg);
+  border-radius: .7rem;
+  border: 1px solid var(--border);
+  position: relative;
+  display: none;
+}
+
+.player-text.visible { display: block; }
+
+.player-text .highlight {
+  background: rgba(0,217,255,.18);
+  border-radius: 2px;
+  transition: background .3s;
+}
+
+.transcript-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: .75rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  padding: .3rem .75rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: all .2s;
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+}
+.transcript-toggle:hover { border-color: var(--wave); color: var(--wave); }
+
+.vocab-toggle {
+  background: none;
+  border: 1px solid rgba(167,139,250,.35);
+  color: var(--purple);
+  font-size: .75rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  padding: .3rem .75rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  margin-left: .5rem;
+  transition: all .2s;
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+}
+.vocab-toggle:hover { border-color: var(--purple); background: rgba(167,139,250,.08); }
+
+.vocab-box {
+  display: none;
+  margin-bottom: 1.2rem;
+  padding: 1rem 1.2rem;
+  background: rgba(167,139,250,.05);
+  border: 1px solid rgba(167,139,250,.22);
+  border-radius: .8rem;
+}
+.vocab-box.visible { display: block; }
+
+.vocab-item { padding: .55rem 0; border-bottom: 1px dashed var(--border); }
+.vocab-item:last-child { border-bottom: none; padding-bottom: 0; }
+.vocab-item:first-child { padding-top: 0; }
+
+.vocab-head {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  margin-bottom: .3rem;
+  flex-wrap: wrap;
+}
+.vocab-word {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  color: var(--purple);
+  font-size: .85rem;
+}
+.vocab-word-ar {
+  font-family: 'Noto Naskh Arabic', serif;
+  color: var(--arabic);
+  direction: rtl;
+  font-size: .85rem;
+  margin-left: auto;
+}
+.vocab-example {
+  font-size: .83rem;
+  color: var(--muted);
+  line-height: 1.5;
+  padding-left: 2.55rem;
+}
+.vocab-example b { color: var(--ink); font-weight: 600; }
+
+.controls-row {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  flex-wrap: wrap;
+}
+
+.btn-play {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--wave);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: opacity .2s, transform .15s;
+  color: #000;
+}
+.btn-play:hover { opacity: .85; transform: scale(1.05); }
+.btn-play:active { transform: scale(.95); }
+.btn-play svg { width: 20px; height: 20px; }
+
+.btn-replay {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all .2s;
+}
+.btn-replay:hover { border-color: var(--wave); color: var(--wave); }
+.btn-replay svg { width: 15px; height: 15px; }
+
+.speed-group {
+  display: flex;
+  gap: .3rem;
+  align-items: center;
+  margin-left: auto;
+}
+.speed-label { font-size: .7rem; color: var(--dim); letter-spacing: .08em; }
+.speed-btn {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: .72rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  padding: .3rem .55rem;
+  border-radius: .4rem;
+  cursor: pointer;
+  transition: all .15s;
+}
+.speed-btn:hover { border-color: var(--wave); color: var(--wave); }
+.speed-btn.active { background: rgba(0,217,255,.15); border-color: var(--wave); color: var(--wave); }
+
+.playing-indicator {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+}
+.playing-indicator.active { display: flex; }
+.playing-indicator span {
+  display: block;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--wave);
+  animation: bar 1s ease-in-out infinite;
+}
+.playing-indicator span:nth-child(1) { height: 8px;  animation-delay: 0s; }
+.playing-indicator span:nth-child(2) { height: 16px; animation-delay: .15s; }
+.playing-indicator span:nth-child(3) { height: 12px; animation-delay: .3s; }
+.playing-indicator span:nth-child(4) { height: 20px; animation-delay: .15s; }
+.playing-indicator span:nth-child(5) { height: 8px;  animation-delay: 0s; }
+@keyframes bar {
+  0%, 100% { transform: scaleY(1); }
+  50%       { transform: scaleY(.35); }
+}
+
+/* ── QUIZ ────────────────────────────────────── */
+.quiz-section {
+  padding: 1.4rem 1.6rem;
+}
+
+.quiz-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.quiz-title svg { width: 14px; height: 14px; color: var(--amber); }
+
+.question-block {
+  margin-bottom: 1.5rem;
+}
+
+.question-text {
+  font-size: .9rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: .7rem;
+  line-height: 1.5;
+}
+
+.question-num {
+  color: var(--wave);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  margin-right: .4rem;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: .45rem;
+}
+
+.option-btn {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: .85rem;
+  font-family: 'Inter', sans-serif;
+  text-align: left;
+  padding: .65rem 1rem;
+  border-radius: .6rem;
+  cursor: pointer;
+  transition: all .18s;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  line-height: 1.4;
+}
+.option-btn:hover:not(:disabled) { border-color: var(--wave); color: var(--ink); background: rgba(0,217,255,.06); }
+.option-btn:disabled { cursor: default; }
+.option-btn.correct  { border-color: var(--green); color: var(--green); background: rgba(57,217,138,.1); }
+.option-btn.wrong    { border-color: var(--red); color: var(--red); background: rgba(255,107,107,.1); }
+.option-btn.reveal   { border-color: var(--green); color: var(--green); background: rgba(57,217,138,.07); }
+
+.opt-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  font-size: .68rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.feedback-msg {
+  font-size: .8rem;
+  margin-top: .6rem;
+  padding: .55rem .9rem;
+  border-radius: .5rem;
+  display: none;
+  line-height: 1.5;
+}
+.feedback-msg.show { display: block; }
+.feedback-msg.ok  { background: rgba(57,217,138,.12); color: var(--green); }
+.feedback-msg.err { background: rgba(255,107,107,.12); color: var(--red); }
+
+.quiz-actions {
+  display: flex;
+  gap: .6rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-check {
+  background: var(--wave);
+  color: #000;
+  border: none;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: .82rem;
+  padding: .6rem 1.4rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: opacity .2s;
+}
+.btn-check:hover { opacity: .85; }
+.btn-check:disabled { opacity: .4; cursor: default; }
+
+.btn-reset {
+  background: var(--card);
+  color: var(--muted);
+  border: 1px solid var(--border);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: .82rem;
+  padding: .6rem 1.2rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn-reset:hover { border-color: var(--border2); color: var(--ink); }
+
+.score-display {
+  display: none;
+  align-items: center;
+  gap: .5rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: .82rem;
+  font-weight: 600;
+  margin-left: auto;
+}
+.score-display.show { display: flex; }
+.score-num { color: var(--wave); font-size: 1rem; }
+
+/* ── TIP BOX ─────────────────────────────────── */
+.tip-box {
+  background: rgba(167,139,250,.08);
+  border: 1px solid rgba(167,139,250,.25);
+  border-radius: .8rem;
+  padding: 1rem 1.2rem;
+  margin-bottom: 2rem;
+  font-size: .85rem;
+  color: var(--muted);
+  line-height: 1.6;
+  display: flex;
+  gap: .8rem;
+  align-items: flex-start;
+}
+.tip-icon { font-size: 1.1rem; flex-shrink: 0; }
+.tip-arabic {
+  font-family: 'Noto Naskh Arabic', serif;
+  direction: rtl;
+  color: var(--arabic);
+  display: block;
+  margin-top: .3rem;
+  font-size: .9rem;
+}
+
+/* ── DICTATION ───────────────────────────────── */
+.dictation-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1.1rem;
+  padding: 1.4rem 1.6rem;
+  margin-bottom: 2rem;
+}
+
+.dictation-card h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: .4rem;
+}
+
+.dictation-arabic {
+  font-family: 'Noto Naskh Arabic', serif;
+  font-size: .88rem;
+  color: var(--arabic);
+  direction: rtl;
+  margin-bottom: 1rem;
+  opacity: .85;
+}
+
+.dictation-sentence {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: .8rem;
+  flex-wrap: wrap;
+}
+
+.sentence-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--wave);
+  background: rgba(0,217,255,.1);
+  border: 1px solid rgba(0,217,255,.25);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.btn-play-small {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--wave);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all .18s;
+}
+.btn-play-small:hover { background: rgba(0,217,255,.12); }
+.btn-play-small svg { width: 13px; height: 13px; }
+
+.dictation-input {
+  flex: 1;
+  min-width: 200px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  font-size: .88rem;
+  padding: .5rem .9rem;
+  border-radius: .55rem;
+  outline: none;
+  transition: border-color .2s;
+}
+.dictation-input:focus { border-color: var(--wave); }
+.dictation-input.correct { border-color: var(--green); }
+.dictation-input.wrong   { border-color: var(--red); }
+
+.dictation-reveal {
+  font-size: .78rem;
+  color: var(--muted);
+  margin-left: .4rem;
+  display: none;
+}
+.dictation-reveal.show { display: inline; }
+.dictation-reveal .answer-text { color: var(--green); font-weight: 500; }
+
+.btn-check-dict {
+  background: var(--wave);
+  color: #000;
+  border: none;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: .82rem;
+  padding: .6rem 1.4rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  margin-top: .5rem;
+  transition: opacity .2s;
+}
+.btn-check-dict:hover { opacity: .85; }
+
+/* ── PROGRESS ────────────────────────────────── */
+.progress-bar-wrap {
+  background: var(--border);
+  border-radius: 1rem;
+  height: 4px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--wave), var(--purple));
+  border-radius: 1rem;
+  transition: width .5s ease;
+}
+
+.overall-score {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+.score-big {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--wave);
+  line-height: 1;
+}
+.score-big span { font-size: 1rem; color: var(--dim); }
+.score-info { font-size: .83rem; color: var(--muted); line-height: 1.5; }
+.score-info strong { color: var(--ink); font-weight: 500; }
+
+footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--dim);
+  font-size: .75rem;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 600px) {
+  .hero-title { font-size: 3rem; }
+  .lesson-header { flex-direction: column; }
+  .speed-group { margin-left: 0; }
+  .dictation-input { min-width: 140px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <p class="hero-eyebrow">English Skills · Listening Practice</p>
+  <div class="waveform" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span>
+  </div>
+  <h1 class="hero-title">Listen<br><em>Up.</em></h1>
+  <p class="hero-sub">Real audio lessons, comprehension questions, and dictation drills — all in one place.</p>
+  <p class="hero-arabic">تمارين استماع حقيقية مع أسئلة فهم وإملاء — كل شيء في مكان واحد</p>
+  <a href="#app" class="hero-cta">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M8 5v14l11-7z"/></svg>
+    Start Listening
+  </a>
+</section>
+
+<!-- NAV -->
+<nav class="level-nav" id="level-nav">
+  <span class="level-label">Level</span>
+  <button class="lvl-btn active" onclick="filterLevel('all')">All</button>
+  <button class="lvl-btn" onclick="filterLevel('A1')">A1 · Beginner</button>
+  <button class="lvl-btn" onclick="filterLevel('A2')">A2 · Elementary</button>
+  <button class="lvl-btn" onclick="filterLevel('B1')">B1 · Intermediate</button>
+  <button class="lvl-btn" onclick="filterLevel('B2')">B2 · Upper-Int</button>
+</nav>
+
+<!-- APP -->
+<div class="app" id="app">
+
+  <!-- Overall Score -->
+  <div class="overall-score">
+    <div class="score-big" id="total-score">0<span>/0</span></div>
+    <div class="score-info">
+      <strong>Your Progress</strong><br>
+      Answer the questions below to track your score. Your progress is saved automatically on this device.<br>
+      <span style="font-family:'Noto Naskh Arabic',serif;color:var(--arabic);direction:rtl;font-size:.95rem;">أجب على الأسئلة لتتابع تقدمك — يتم حفظ تقدمك تلقائيًا على هذا الجهاز</span>
+    </div>
+    <button class="btn-reset" style="margin-left:auto;flex-shrink:0;" onclick="clearAllProgress()">Reset All Progress</button>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+  </div>
+
+  <!-- TIP -->
+  <div class="tip-box">
+    <span class="tip-icon">💡</span>
+    <div>
+      <strong style="color:var(--ink)">How to use this trainer:</strong>
+      Press <em style="color:var(--wave)">Play</em> and listen first — without reading. Then answer the questions. Use the transcript only to check after answering.
+      <span class="tip-arabic">اضغط تشغيل واستمع أولاً بدون قراءة — ثم أجب على الأسئلة. استخدم النص المكتوب للتحقق فقط بعد الإجابة.</span>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+       LESSON 1  —  A1
+  ════════════════════════════════════════ -->
+  <p class="section-title">A1 · Beginner Lessons</p>
+
+  <div class="lesson-card" data-level="A1">
+    <div class="lesson-header">
+      <div>
+        <div class="lesson-meta">
+          <span class="badge badge-a1">A1</span>
+          <span class="badge badge-topic">Daily Routine</span>
+        </div>
+        <div class="lesson-title">My Morning Routine</div>
+        <div class="lesson-arabic">روتين الصباح</div>
+      </div>
+    </div>
+
+    <div class="player">
+      <button class="transcript-toggle" onclick="toggleTranscript(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4 6h16M4 12h16M4 18h12"/></svg>
+        Show Transcript
+      </button>
+      <div class="player-text" id="text-l1">
+        My name is Sara. I wake up at seven o'clock every morning. First, I wash my face and brush my teeth. Then I go to the kitchen and make breakfast. I usually eat bread and eggs. I drink a cup of tea. After breakfast, I put on my clothes and take my bag. I leave the house at eight o'clock and walk to school. I like mornings because they are quiet and peaceful.
+      </div>
+      <div class="controls-row">
+        <button class="btn-play" onclick="playLesson(this, 'text-l1', 'indicator-l1')" title="Play audio">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button class="btn-replay" onclick="replayLesson('text-l1', 'indicator-l1')" title="Replay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-4.49"/></svg>
+        </button>
+        <div class="playing-indicator" id="indicator-l1">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="speed-group">
+          <span class="speed-label">Speed</span>
+          <button class="speed-btn active" onclick="setSpeed(0.75, this)">0.75×</button>
+          <button class="speed-btn" onclick="setSpeed(1, this)">1×</button>
+          <button class="speed-btn" onclick="setSpeed(1.25, this)">1.25×</button>
+        </div>
+      </div>
+
+      <button class="vocab-toggle" onclick="toggleVocab(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 4v16m8-8H4"/></svg>
+        Key Vocabulary · أهم الكلمات
+      </button>
+      <div class="vocab-box" id="vocab-l1">
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('wake up')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">wake up</span>
+            <span class="vocab-word-ar">يستيقظ</span>
+          </div>
+          <div class="vocab-example">I <b>wake up</b> at seven o'clock every morning.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('brush my teeth')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">brush my teeth</span>
+            <span class="vocab-word-ar">أنظف أسناني</span>
+          </div>
+          <div class="vocab-example">I wash my face and <b>brush my teeth</b>.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('kitchen')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">kitchen</span>
+            <span class="vocab-word-ar">مطبخ</span>
+          </div>
+          <div class="vocab-example">I go to the <b>kitchen</b> and make breakfast.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('put on my clothes')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">put on my clothes</span>
+            <span class="vocab-word-ar">أرتدي ملابسي</span>
+          </div>
+          <div class="vocab-example">I <b>put on my clothes</b> and take my bag.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('peaceful')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">peaceful</span>
+            <span class="vocab-word-ar">هادئ</span>
+          </div>
+          <div class="vocab-example">I like mornings because they are quiet and <b>peaceful</b>.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-title">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        Comprehension Questions · أسئلة الفهم
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q1.</span> What time does Sara wake up?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l1q1')"><span class="opt-letter">A</span> Six o'clock</button>
+          <button class="option-btn" onclick="selectOption(this, 'l1q1')"><span class="opt-letter">B</span> Seven o'clock</button>
+          <button class="option-btn" onclick="selectOption(this, 'l1q1')"><span class="opt-letter">C</span> Eight o'clock</button>
+          <button class="option-btn" onclick="selectOption(this, 'l1q1')"><span class="opt-letter">D</span> Nine o'clock</button>
+        </div>
+        <div class="feedback-msg" id="fb-l1q1"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q2.</span> What does Sara eat for breakfast?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l1q2')"><span class="opt-letter">A</span> Fruit and milk</button>
+          <button class="option-btn" onclick="selectOption(this, 'l1q2')"><span class="opt-letter">B</span> Cereal and juice</button>
+          <button class="option-btn" onclick="selectOption(this, 'l1q2')"><span class="opt-letter">C</span> Bread and eggs</button>
+          <button class="option-btn" onclick="selectOption(this, 'l1q2')"><span class="opt-letter">D</span> Rice and meat</button>
+        </div>
+        <div class="feedback-msg" id="fb-l1q2"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q3.</span> How does Sara get to school?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l1q3')"><span class="opt-letter">A</span> By bus</button>
+          <button class="option-btn" onclick="selectOption(this, 'l1q3')"><span class="opt-letter">B</span> By car</button>
+          <button class="option-btn" onclick="selectOption(this, 'l1q3')"><span class="opt-letter">C</span> By bike</button>
+          <button class="option-btn" onclick="selectOption(this, 'l1q3')"><span class="opt-letter">D</span> She walks</button>
+        </div>
+        <div class="feedback-msg" id="fb-l1q3"></div>
+      </div>
+
+      <div class="quiz-actions">
+        <button class="btn-check" onclick="checkQuiz('l1', ['B','C','D'], 3)" id="check-l1">Check Answers</button>
+        <button class="btn-reset" onclick="resetQuiz('l1', 3)">Reset</button>
+        <div class="score-display" id="score-l1"><span class="score-num"></span></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+       LESSON 5  —  A1
+  ════════════════════════════════════════ -->
+  <div class="lesson-card" data-level="A1">
+    <div class="lesson-header">
+      <div>
+        <div class="lesson-meta">
+          <span class="badge badge-a1">A1</span>
+          <span class="badge badge-topic">Family</span>
+        </div>
+        <div class="lesson-title">My Family</div>
+        <div class="lesson-arabic">عائلتي</div>
+      </div>
+    </div>
+
+    <div class="player">
+      <button class="transcript-toggle" onclick="toggleTranscript(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4 6h16M4 12h16M4 18h12"/></svg>
+        Show Transcript
+      </button>
+      <div class="player-text" id="text-l5">
+        I have a small family. My father's name is Omar and my mother's name is Laila. I have one brother and one sister. My brother is older than me and he is a doctor. My sister is younger than me and she is a student. We live in a big house with our grandmother. Every Friday, all my family comes together and we eat lunch. I love my family very much because we help each other.
+      </div>
+      <div class="controls-row">
+        <button class="btn-play" onclick="playLesson(this, 'text-l5', 'indicator-l5')" title="Play audio">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button class="btn-replay" onclick="replayLesson('text-l5', 'indicator-l5')" title="Replay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-4.49"/></svg>
+        </button>
+        <div class="playing-indicator" id="indicator-l5">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="speed-group">
+          <span class="speed-label">Speed</span>
+          <button class="speed-btn active" onclick="setSpeed(0.75, this)">0.75×</button>
+          <button class="speed-btn" onclick="setSpeed(1, this)">1×</button>
+          <button class="speed-btn" onclick="setSpeed(1.25, this)">1.25×</button>
+        </div>
+      </div>
+
+      <button class="vocab-toggle" onclick="toggleVocab(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 4v16m8-8H4"/></svg>
+        Key Vocabulary · أهم الكلمات
+      </button>
+      <div class="vocab-box" id="vocab-l5">
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('family')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">family</span>
+            <span class="vocab-word-ar">عائلة</span>
+          </div>
+          <div class="vocab-example">My <b>family</b> is very important to me.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('older')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">older</span>
+            <span class="vocab-word-ar">أكبر سناً</span>
+          </div>
+          <div class="vocab-example">My brother is <b>older</b> than me.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('younger')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">younger</span>
+            <span class="vocab-word-ar">أصغر سناً</span>
+          </div>
+          <div class="vocab-example">My sister is <b>younger</b> than me.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('grandmother')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">grandmother</span>
+            <span class="vocab-word-ar">جدة</span>
+          </div>
+          <div class="vocab-example">We live with our <b>grandmother</b>.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('together')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">together</span>
+            <span class="vocab-word-ar">معاً</span>
+          </div>
+          <div class="vocab-example">Every Friday, all my family comes <b>together</b>.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-title">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        Comprehension Questions · أسئلة الفهم
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q1.</span> What is the father's name?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l5q1')"><span class="opt-letter">A</span> Ahmed</button>
+          <button class="option-btn" onclick="selectOption(this, 'l5q1')"><span class="opt-letter">B</span> Omar</button>
+          <button class="option-btn" onclick="selectOption(this, 'l5q1')"><span class="opt-letter">C</span> Sami</button>
+          <button class="option-btn" onclick="selectOption(this, 'l5q1')"><span class="opt-letter">D</span> Khaled</button>
+        </div>
+        <div class="feedback-msg" id="fb-l5q1"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q2.</span> Who is older, the brother or the sister?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l5q2')"><span class="opt-letter">A</span> The brother</button>
+          <button class="option-btn" onclick="selectOption(this, 'l5q2')"><span class="opt-letter">B</span> The sister</button>
+          <button class="option-btn" onclick="selectOption(this, 'l5q2')"><span class="opt-letter">C</span> They are twins</button>
+          <button class="option-btn" onclick="selectOption(this, 'l5q2')"><span class="opt-letter">D</span> Not mentioned</button>
+        </div>
+        <div class="feedback-msg" id="fb-l5q2"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q3.</span> What is the sister's job?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l5q3')"><span class="opt-letter">A</span> Doctor</button>
+          <button class="option-btn" onclick="selectOption(this, 'l5q3')"><span class="opt-letter">B</span> Teacher</button>
+          <button class="option-btn" onclick="selectOption(this, 'l5q3')"><span class="opt-letter">C</span> Student</button>
+          <button class="option-btn" onclick="selectOption(this, 'l5q3')"><span class="opt-letter">D</span> Nurse</button>
+        </div>
+        <div class="feedback-msg" id="fb-l5q3"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q4.</span> When does the family come together?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l5q4')"><span class="opt-letter">A</span> Every Sunday</button>
+          <button class="option-btn" onclick="selectOption(this, 'l5q4')"><span class="opt-letter">B</span> Every Friday</button>
+          <button class="option-btn" onclick="selectOption(this, 'l5q4')"><span class="opt-letter">C</span> Every Saturday</button>
+          <button class="option-btn" onclick="selectOption(this, 'l5q4')"><span class="opt-letter">D</span> Every day</button>
+        </div>
+        <div class="feedback-msg" id="fb-l5q4"></div>
+      </div>
+
+      <div class="quiz-actions">
+        <button class="btn-check" onclick="checkQuiz('l5', ['B','A','C','B'], 4)" id="check-l5">Check Answers</button>
+        <button class="btn-reset" onclick="resetQuiz('l5', 4)">Reset</button>
+        <div class="score-display" id="score-l5"><span class="score-num"></span></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+       LESSON 6  —  A1
+  ════════════════════════════════════════ -->
+  <div class="lesson-card" data-level="A1">
+    <div class="lesson-header">
+      <div>
+        <div class="lesson-meta">
+          <span class="badge badge-a1">A1</span>
+          <span class="badge badge-topic">Weather</span>
+        </div>
+        <div class="lesson-title">Today's Weather</div>
+        <div class="lesson-arabic">طقس اليوم</div>
+      </div>
+    </div>
+
+    <div class="player">
+      <button class="transcript-toggle" onclick="toggleTranscript(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4 6h16M4 12h16M4 18h12"/></svg>
+        Show Transcript
+      </button>
+      <div class="player-text" id="text-l6">
+        Good morning! Here is the weather report for today. In the morning, the sky is cloudy and cold. The temperature is ten degrees. In the afternoon, the sun comes out and it becomes warm. The temperature rises to eighteen degrees. In the evening, it might rain a little, so remember to take an umbrella. Tomorrow will be sunny all day with a temperature of twenty degrees. It is a good day to go outside and enjoy the sunshine.
+      </div>
+      <div class="controls-row">
+        <button class="btn-play" onclick="playLesson(this, 'text-l6', 'indicator-l6')" title="Play audio">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button class="btn-replay" onclick="replayLesson('text-l6', 'indicator-l6')" title="Replay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-4.49"/></svg>
+        </button>
+        <div class="playing-indicator" id="indicator-l6">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="speed-group">
+          <span class="speed-label">Speed</span>
+          <button class="speed-btn" onclick="setSpeed(0.75, this)">0.75×</button>
+          <button class="speed-btn active" onclick="setSpeed(1, this)">1×</button>
+          <button class="speed-btn" onclick="setSpeed(1.25, this)">1.25×</button>
+        </div>
+      </div>
+
+      <button class="vocab-toggle" onclick="toggleVocab(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 4v16m8-8H4"/></svg>
+        Key Vocabulary · أهم الكلمات
+      </button>
+      <div class="vocab-box" id="vocab-l6">
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('cloudy')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">cloudy</span>
+            <span class="vocab-word-ar">غائم</span>
+          </div>
+          <div class="vocab-example">In the morning, the sky is <b>cloudy</b> and cold.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('temperature')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">temperature</span>
+            <span class="vocab-word-ar">درجة الحرارة</span>
+          </div>
+          <div class="vocab-example">The <b>temperature</b> rises to eighteen degrees.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('warm')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">warm</span>
+            <span class="vocab-word-ar">دافئ</span>
+          </div>
+          <div class="vocab-example">In the afternoon, it becomes <b>warm</b>.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('umbrella')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">umbrella</span>
+            <span class="vocab-word-ar">مظلة</span>
+          </div>
+          <div class="vocab-example">Remember to take an <b>umbrella</b>.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('sunny')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">sunny</span>
+            <span class="vocab-word-ar">مشمس</span>
+          </div>
+          <div class="vocab-example">Tomorrow will be <b>sunny</b> all day.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-title">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        Comprehension Questions · أسئلة الفهم
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q1.</span> What is the weather like in the morning?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l6q1')"><span class="opt-letter">A</span> Sunny</button>
+          <button class="option-btn" onclick="selectOption(this, 'l6q1')"><span class="opt-letter">B</span> Cloudy and cold</button>
+          <button class="option-btn" onclick="selectOption(this, 'l6q1')"><span class="opt-letter">C</span> Rainy</button>
+          <button class="option-btn" onclick="selectOption(this, 'l6q1')"><span class="opt-letter">D</span> Hot</button>
+        </div>
+        <div class="feedback-msg" id="fb-l6q1"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q2.</span> What is the temperature in the afternoon?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l6q2')"><span class="opt-letter">A</span> Ten degrees</button>
+          <button class="option-btn" onclick="selectOption(this, 'l6q2')"><span class="opt-letter">B</span> Fifteen degrees</button>
+          <button class="option-btn" onclick="selectOption(this, 'l6q2')"><span class="opt-letter">C</span> Eighteen degrees</button>
+          <button class="option-btn" onclick="selectOption(this, 'l6q2')"><span class="opt-letter">D</span> Twenty degrees</button>
+        </div>
+        <div class="feedback-msg" id="fb-l6q2"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q3.</span> What should people take in the evening?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l6q3')"><span class="opt-letter">A</span> A coat</button>
+          <button class="option-btn" onclick="selectOption(this, 'l6q3')"><span class="opt-letter">B</span> Sunglasses</button>
+          <button class="option-btn" onclick="selectOption(this, 'l6q3')"><span class="opt-letter">C</span> An umbrella</button>
+          <button class="option-btn" onclick="selectOption(this, 'l6q3')"><span class="opt-letter">D</span> A hat</button>
+        </div>
+        <div class="feedback-msg" id="fb-l6q3"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q4.</span> What will the weather be like tomorrow?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l6q4')"><span class="opt-letter">A</span> Cloudy</button>
+          <button class="option-btn" onclick="selectOption(this, 'l6q4')"><span class="opt-letter">B</span> Rainy</button>
+          <button class="option-btn" onclick="selectOption(this, 'l6q4')"><span class="opt-letter">C</span> Cold</button>
+          <button class="option-btn" onclick="selectOption(this, 'l6q4')"><span class="opt-letter">D</span> Sunny</button>
+        </div>
+        <div class="feedback-msg" id="fb-l6q4"></div>
+      </div>
+
+      <div class="quiz-actions">
+        <button class="btn-check" onclick="checkQuiz('l6', ['B','C','C','D'], 4)" id="check-l6">Check Answers</button>
+        <button class="btn-reset" onclick="resetQuiz('l6', 4)">Reset</button>
+        <div class="score-display" id="score-l6"><span class="score-num"></span></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+       LESSON 7  —  A1
+  ════════════════════════════════════════ -->
+  <div class="lesson-card" data-level="A1">
+    <div class="lesson-header">
+      <div>
+        <div class="lesson-meta">
+          <span class="badge badge-a1">A1</span>
+          <span class="badge badge-topic">Food</span>
+        </div>
+        <div class="lesson-title">My Favorite Meal</div>
+        <div class="lesson-arabic">وجبتي المفضلة</div>
+      </div>
+    </div>
+
+    <div class="player">
+      <button class="transcript-toggle" onclick="toggleTranscript(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4 6h16M4 12h16M4 18h12"/></svg>
+        Show Transcript
+      </button>
+      <div class="player-text" id="text-l7">
+        My favorite meal is chicken with rice. My mother cooks it every Sunday. First, she washes the rice and puts it in a pot with water. Then she cooks the chicken with onions, garlic, and spices. The kitchen smells wonderful when she is cooking. We sit together at the table and eat the meal with salad and bread. After the meal, we usually have fruit for dessert. I always ask for a second plate because it is so delicious.
+      </div>
+      <div class="controls-row">
+        <button class="btn-play" onclick="playLesson(this, 'text-l7', 'indicator-l7')" title="Play audio">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button class="btn-replay" onclick="replayLesson('text-l7', 'indicator-l7')" title="Replay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-4.49"/></svg>
+        </button>
+        <div class="playing-indicator" id="indicator-l7">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="speed-group">
+          <span class="speed-label">Speed</span>
+          <button class="speed-btn active" onclick="setSpeed(0.75, this)">0.75×</button>
+          <button class="speed-btn" onclick="setSpeed(1, this)">1×</button>
+          <button class="speed-btn" onclick="setSpeed(1.25, this)">1.25×</button>
+        </div>
+      </div>
+
+      <button class="vocab-toggle" onclick="toggleVocab(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 4v16m8-8H4"/></svg>
+        Key Vocabulary · أهم الكلمات
+      </button>
+      <div class="vocab-box" id="vocab-l7">
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('favorite')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">favorite</span>
+            <span class="vocab-word-ar">المفضل</span>
+          </div>
+          <div class="vocab-example">My <b>favorite</b> meal is chicken with rice.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('cook')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">cook</span>
+            <span class="vocab-word-ar">يطبخ</span>
+          </div>
+          <div class="vocab-example">My mother <b>cooks</b> it every Sunday.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('spices')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">spices</span>
+            <span class="vocab-word-ar">توابل</span>
+          </div>
+          <div class="vocab-example">She cooks the chicken with onions, garlic, and <b>spices</b>.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('delicious')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">delicious</span>
+            <span class="vocab-word-ar">لذيذ</span>
+          </div>
+          <div class="vocab-example">It is so <b>delicious</b>.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('dessert')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">dessert</span>
+            <span class="vocab-word-ar">حلوى / تحلية</span>
+          </div>
+          <div class="vocab-example">We usually have fruit for <b>dessert</b>.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-title">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        Comprehension Questions · أسئلة الفهم
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q1.</span> What is the writer's favorite meal?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l7q1')"><span class="opt-letter">A</span> Fish and salad</button>
+          <button class="option-btn" onclick="selectOption(this, 'l7q1')"><span class="opt-letter">B</span> Chicken with rice</button>
+          <button class="option-btn" onclick="selectOption(this, 'l7q1')"><span class="opt-letter">C</span> Pasta</button>
+          <button class="option-btn" onclick="selectOption(this, 'l7q1')"><span class="opt-letter">D</span> Soup</button>
+        </div>
+        <div class="feedback-msg" id="fb-l7q1"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q2.</span> Who cooks the meal?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l7q2')"><span class="opt-letter">A</span> The father</button>
+          <button class="option-btn" onclick="selectOption(this, 'l7q2')"><span class="opt-letter">B</span> The grandmother</button>
+          <button class="option-btn" onclick="selectOption(this, 'l7q2')"><span class="opt-letter">C</span> The mother</button>
+          <button class="option-btn" onclick="selectOption(this, 'l7q2')"><span class="opt-letter">D</span> The writer</button>
+        </div>
+        <div class="feedback-msg" id="fb-l7q2"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q3.</span> What do they eat for dessert?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l7q3')"><span class="opt-letter">A</span> Cake</button>
+          <button class="option-btn" onclick="selectOption(this, 'l7q3')"><span class="opt-letter">B</span> Ice cream</button>
+          <button class="option-btn" onclick="selectOption(this, 'l7q3')"><span class="opt-letter">C</span> Fruit</button>
+          <button class="option-btn" onclick="selectOption(this, 'l7q3')"><span class="opt-letter">D</span> Chocolate</button>
+        </div>
+        <div class="feedback-msg" id="fb-l7q3"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q4.</span> Why does the writer ask for a second plate?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l7q4')"><span class="opt-letter">A</span> He is still hungry</button>
+          <button class="option-btn" onclick="selectOption(this, 'l7q4')"><span class="opt-letter">B</span> It is delicious</button>
+          <button class="option-btn" onclick="selectOption(this, 'l7q4')"><span class="opt-letter">C</span> His mother asks him</button>
+          <button class="option-btn" onclick="selectOption(this, 'l7q4')"><span class="opt-letter">D</span> It is a tradition</button>
+        </div>
+        <div class="feedback-msg" id="fb-l7q4"></div>
+      </div>
+
+      <div class="quiz-actions">
+        <button class="btn-check" onclick="checkQuiz('l7', ['B','C','C','B'], 4)" id="check-l7">Check Answers</button>
+        <button class="btn-reset" onclick="resetQuiz('l7', 4)">Reset</button>
+        <div class="score-display" id="score-l7"><span class="score-num"></span></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+       LESSON 2  —  A2
+  ════════════════════════════════════════ -->
+  <p class="section-title">A2 · Elementary Lessons</p>
+
+  <div class="lesson-card" data-level="A2">
+    <div class="lesson-header">
+      <div>
+        <div class="lesson-meta">
+          <span class="badge badge-a2">A2</span>
+          <span class="badge badge-topic">Shopping</span>
+        </div>
+        <div class="lesson-title">At the Supermarket</div>
+        <div class="lesson-arabic">في السوبرماركت</div>
+      </div>
+    </div>
+
+    <div class="player">
+      <button class="transcript-toggle" onclick="toggleTranscript(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4 6h16M4 12h16M4 18h12"/></svg>
+        Show Transcript
+      </button>
+      <div class="player-text" id="text-l2">
+        Last Saturday, Ahmed went to the supermarket with his mother. They needed to buy food for the week. Ahmed took a shopping basket and walked around the store. His mother asked him to find three things: milk, tomatoes, and chicken. Ahmed found the milk in the drinks section. The tomatoes were in the vegetables area. He couldn't find the chicken at first, but a shop assistant helped him. At the end, they paid at the checkout. The total was forty-two pounds. Ahmed's mother was happy because the prices were lower than last week.
+      </div>
+      <div class="controls-row">
+        <button class="btn-play" onclick="playLesson(this, 'text-l2', 'indicator-l2')" title="Play audio">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button class="btn-replay" onclick="replayLesson('text-l2', 'indicator-l2')" title="Replay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-4.49"/></svg>
+        </button>
+        <div class="playing-indicator" id="indicator-l2">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="speed-group">
+          <span class="speed-label">Speed</span>
+          <button class="speed-btn active" onclick="setSpeed(0.75, this)">0.75×</button>
+          <button class="speed-btn" onclick="setSpeed(1, this)">1×</button>
+          <button class="speed-btn" onclick="setSpeed(1.25, this)">1.25×</button>
+        </div>
+      </div>
+
+      <button class="vocab-toggle" onclick="toggleVocab(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 4v16m8-8H4"/></svg>
+        Key Vocabulary · أهم الكلمات
+      </button>
+      <div class="vocab-box" id="vocab-l2">
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('shopping basket')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">shopping basket</span>
+            <span class="vocab-word-ar">سلة تسوق</span>
+          </div>
+          <div class="vocab-example">Ahmed took a <b>shopping basket</b> and walked around the store.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('section')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">section</span>
+            <span class="vocab-word-ar">قسم</span>
+          </div>
+          <div class="vocab-example">Ahmed found the milk in the drinks <b>section</b>.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('shop assistant')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">shop assistant</span>
+            <span class="vocab-word-ar">موظف متجر</span>
+          </div>
+          <div class="vocab-example">A <b>shop assistant</b> helped him find the chicken.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('checkout')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">checkout</span>
+            <span class="vocab-word-ar">صندوق الدفع</span>
+          </div>
+          <div class="vocab-example">They paid at the <b>checkout</b>.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('prices')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">prices</span>
+            <span class="vocab-word-ar">أسعار</span>
+          </div>
+          <div class="vocab-example">The <b>prices</b> were lower than last week.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-title">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        Comprehension Questions · أسئلة الفهم
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q1.</span> Who went with Ahmed to the supermarket?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l2q1')"><span class="opt-letter">A</span> His father</button>
+          <button class="option-btn" onclick="selectOption(this, 'l2q1')"><span class="opt-letter">B</span> His sister</button>
+          <button class="option-btn" onclick="selectOption(this, 'l2q1')"><span class="opt-letter">C</span> His mother</button>
+          <button class="option-btn" onclick="selectOption(this, 'l2q1')"><span class="opt-letter">D</span> His friend</button>
+        </div>
+        <div class="feedback-msg" id="fb-l2q1"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q2.</span> Where did Ahmed find the milk?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l2q2')"><span class="opt-letter">A</span> The vegetables area</button>
+          <button class="option-btn" onclick="selectOption(this, 'l2q2')"><span class="opt-letter">B</span> The drinks section</button>
+          <button class="option-btn" onclick="selectOption(this, 'l2q2')"><span class="opt-letter">C</span> Near the checkout</button>
+          <button class="option-btn" onclick="selectOption(this, 'l2q2')"><span class="opt-letter">D</span> He couldn't find it</button>
+        </div>
+        <div class="feedback-msg" id="fb-l2q2"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q3.</span> How much did they pay in total?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l2q3')"><span class="opt-letter">A</span> Twenty-four pounds</button>
+          <button class="option-btn" onclick="selectOption(this, 'l2q3')"><span class="opt-letter">B</span> Thirty-two pounds</button>
+          <button class="option-btn" onclick="selectOption(this, 'l2q3')"><span class="opt-letter">C</span> Forty-two pounds</button>
+          <button class="option-btn" onclick="selectOption(this, 'l2q3')"><span class="opt-letter">D</span> Fifty pounds</button>
+        </div>
+        <div class="feedback-msg" id="fb-l2q3"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q4.</span> Why was Ahmed's mother happy at the end?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l2q4')"><span class="opt-letter">A</span> They finished quickly</button>
+          <button class="option-btn" onclick="selectOption(this, 'l2q4')"><span class="opt-letter">B</span> Ahmed was very helpful</button>
+          <button class="option-btn" onclick="selectOption(this, 'l2q4')"><span class="opt-letter">C</span> Prices were lower than last week</button>
+          <button class="option-btn" onclick="selectOption(this, 'l2q4')"><span class="opt-letter">D</span> They got a discount</button>
+        </div>
+        <div class="feedback-msg" id="fb-l2q4"></div>
+      </div>
+
+      <div class="quiz-actions">
+        <button class="btn-check" onclick="checkQuiz('l2', ['C','B','C','C'], 4)" id="check-l2">Check Answers</button>
+        <button class="btn-reset" onclick="resetQuiz('l2', 4)">Reset</button>
+        <div class="score-display" id="score-l2"><span class="score-num"></span></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+       LESSON 8  —  A2
+  ════════════════════════════════════════ -->
+  <div class="lesson-card" data-level="A2">
+    <div class="lesson-header">
+      <div>
+        <div class="lesson-meta">
+          <span class="badge badge-a2">A2</span>
+          <span class="badge badge-topic">Travel</span>
+        </div>
+        <div class="lesson-title">A Weekend Trip to the Beach</div>
+        <div class="lesson-arabic">رحلة نهاية الأسبوع إلى الشاطئ</div>
+      </div>
+    </div>
+
+    <div class="player">
+      <button class="transcript-toggle" onclick="toggleTranscript(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4 6h16M4 12h16M4 18h12"/></svg>
+        Show Transcript
+      </button>
+      <div class="player-text" id="text-l8">
+        Last weekend, my family and I went on a short trip to the beach. We left home early on Saturday morning and drove for about two hours. When we arrived, we found a nice spot near the water and set up our umbrella. My father went fishing while my sister and I swam in the sea. In the afternoon, we had a picnic with sandwiches and cold drinks. We stayed until sunset because the sky turned beautiful colours of orange and pink. On the way home, we were all tired but very happy. It was one of the best trips we have had this year.
+      </div>
+      <div class="controls-row">
+        <button class="btn-play" onclick="playLesson(this, 'text-l8', 'indicator-l8')" title="Play audio">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button class="btn-replay" onclick="replayLesson('text-l8', 'indicator-l8')" title="Replay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-4.49"/></svg>
+        </button>
+        <div class="playing-indicator" id="indicator-l8">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="speed-group">
+          <span class="speed-label">Speed</span>
+          <button class="speed-btn active" onclick="setSpeed(0.75, this)">0.75×</button>
+          <button class="speed-btn" onclick="setSpeed(1, this)">1×</button>
+          <button class="speed-btn" onclick="setSpeed(1.25, this)">1.25×</button>
+        </div>
+      </div>
+
+      <button class="vocab-toggle" onclick="toggleVocab(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 4v16m8-8H4"/></svg>
+        Key Vocabulary · أهم الكلمات
+      </button>
+      <div class="vocab-box" id="vocab-l8">
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('trip')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">trip</span>
+            <span class="vocab-word-ar">رحلة</span>
+          </div>
+          <div class="vocab-example">We went on a short <b>trip</b> to the beach.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('arrived')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">arrived</span>
+            <span class="vocab-word-ar">وصل</span>
+          </div>
+          <div class="vocab-example">When we <b>arrived</b>, we found a nice spot.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('umbrella')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">umbrella</span>
+            <span class="vocab-word-ar">مظلة</span>
+          </div>
+          <div class="vocab-example">We set up our <b>umbrella</b> near the water.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('picnic')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">picnic</span>
+            <span class="vocab-word-ar">نزهة</span>
+          </div>
+          <div class="vocab-example">We had a <b>picnic</b> with sandwiches.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('sunset')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">sunset</span>
+            <span class="vocab-word-ar">غروب الشمس</span>
+          </div>
+          <div class="vocab-example">We stayed until <b>sunset</b>.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-title">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        Comprehension Questions · أسئلة الفهم
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q1.</span> How long did the drive take?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l8q1')"><span class="opt-letter">A</span> One hour</button>
+          <button class="option-btn" onclick="selectOption(this, 'l8q1')"><span class="opt-letter">B</span> Two hours</button>
+          <button class="option-btn" onclick="selectOption(this, 'l8q1')"><span class="opt-letter">C</span> Three hours</button>
+          <button class="option-btn" onclick="selectOption(this, 'l8q1')"><span class="opt-letter">D</span> Four hours</button>
+        </div>
+        <div class="feedback-msg" id="fb-l8q1"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q2.</span> What did the father do at the beach?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l8q2')"><span class="opt-letter">A</span> Swimming</button>
+          <button class="option-btn" onclick="selectOption(this, 'l8q2')"><span class="opt-letter">B</span> Fishing</button>
+          <button class="option-btn" onclick="selectOption(this, 'l8q2')"><span class="opt-letter">C</span> Reading</button>
+          <button class="option-btn" onclick="selectOption(this, 'l8q2')"><span class="opt-letter">D</span> Sleeping</button>
+        </div>
+        <div class="feedback-msg" id="fb-l8q2"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q3.</span> What did the family eat at the picnic?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l8q3')"><span class="opt-letter">A</span> Pizza</button>
+          <button class="option-btn" onclick="selectOption(this, 'l8q3')"><span class="opt-letter">B</span> Rice and chicken</button>
+          <button class="option-btn" onclick="selectOption(this, 'l8q3')"><span class="opt-letter">C</span> Sandwiches and cold drinks</button>
+          <button class="option-btn" onclick="selectOption(this, 'l8q3')"><span class="opt-letter">D</span> Fruit only</button>
+        </div>
+        <div class="feedback-msg" id="fb-l8q3"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q4.</span> Why did they stay until sunset?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l8q4')"><span class="opt-letter">A</span> They were tired</button>
+          <button class="option-btn" onclick="selectOption(this, 'l8q4')"><span class="opt-letter">B</span> The sky turned beautiful colours</button>
+          <button class="option-btn" onclick="selectOption(this, 'l8q4')"><span class="opt-letter">C</span> The car broke down</button>
+          <button class="option-btn" onclick="selectOption(this, 'l8q4')"><span class="opt-letter">D</span> They missed the bus</button>
+        </div>
+        <div class="feedback-msg" id="fb-l8q4"></div>
+      </div>
+
+      <div class="quiz-actions">
+        <button class="btn-check" onclick="checkQuiz('l8', ['B','B','C','B'], 4)" id="check-l8">Check Answers</button>
+        <button class="btn-reset" onclick="resetQuiz('l8', 4)">Reset</button>
+        <div class="score-display" id="score-l8"><span class="score-num"></span></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+       LESSON 9  —  A2
+  ════════════════════════════════════════ -->
+  <div class="lesson-card" data-level="A2">
+    <div class="lesson-header">
+      <div>
+        <div class="lesson-meta">
+          <span class="badge badge-a2">A2</span>
+          <span class="badge badge-topic">Hobbies</span>
+        </div>
+        <div class="lesson-title">Learning to Play the Guitar</div>
+        <div class="lesson-arabic">تعلم عزف الجيتار</div>
+      </div>
+    </div>
+
+    <div class="player">
+      <button class="transcript-toggle" onclick="toggleTranscript(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4 6h16M4 12h16M4 18h12"/></svg>
+        Show Transcript
+      </button>
+      <div class="player-text" id="text-l9">
+        Six months ago, I decided to learn how to play the guitar. At first, it was very difficult. My fingers hurt every time I practised, and I couldn't remember where to put them. I found a teacher online who gave me video lessons twice a week. I practised for thirty minutes every day after school. After two months, I could play my first simple song. Now I can play several songs and I even wrote a short piece of music myself. My family enjoys listening to me play in the evenings. Learning guitar has taught me that practice really does make progress.
+      </div>
+      <div class="controls-row">
+        <button class="btn-play" onclick="playLesson(this, 'text-l9', 'indicator-l9')" title="Play audio">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button class="btn-replay" onclick="replayLesson('text-l9', 'indicator-l9')" title="Replay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-4.49"/></svg>
+        </button>
+        <div class="playing-indicator" id="indicator-l9">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="speed-group">
+          <span class="speed-label">Speed</span>
+          <button class="speed-btn active" onclick="setSpeed(0.75, this)">0.75×</button>
+          <button class="speed-btn" onclick="setSpeed(1, this)">1×</button>
+          <button class="speed-btn" onclick="setSpeed(1.25, this)">1.25×</button>
+        </div>
+      </div>
+
+      <button class="vocab-toggle" onclick="toggleVocab(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 4v16m8-8H4"/></svg>
+        Key Vocabulary · أهم الكلمات
+      </button>
+      <div class="vocab-box" id="vocab-l9">
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('decided')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">decided</span>
+            <span class="vocab-word-ar">قرر</span>
+          </div>
+          <div class="vocab-example">I <b>decided</b> to learn how to play the guitar.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('difficult')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">difficult</span>
+            <span class="vocab-word-ar">صعب</span>
+          </div>
+          <div class="vocab-example">At first, it was very <b>difficult</b>.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('practised')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">practised</span>
+            <span class="vocab-word-ar">تدرب</span>
+          </div>
+          <div class="vocab-example">I <b>practised</b> for thirty minutes every day.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('lessons')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">lessons</span>
+            <span class="vocab-word-ar">دروس</span>
+          </div>
+          <div class="vocab-example">My teacher gave me video <b>lessons</b> twice a week.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('progress')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">progress</span>
+            <span class="vocab-word-ar">تقدم</span>
+          </div>
+          <div class="vocab-example">Practice really does make <b>progress</b>.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-title">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        Comprehension Questions · أسئلة الفهم
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q1.</span> When did the writer start learning guitar?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l9q1')"><span class="opt-letter">A</span> One month ago</button>
+          <button class="option-btn" onclick="selectOption(this, 'l9q1')"><span class="opt-letter">B</span> Six months ago</button>
+          <button class="option-btn" onclick="selectOption(this, 'l9q1')"><span class="opt-letter">C</span> One year ago</button>
+          <button class="option-btn" onclick="selectOption(this, 'l9q1')"><span class="opt-letter">D</span> Last week</button>
+        </div>
+        <div class="feedback-msg" id="fb-l9q1"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q2.</span> How often did the teacher give lessons?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l9q2')"><span class="opt-letter">A</span> Once a week</button>
+          <button class="option-btn" onclick="selectOption(this, 'l9q2')"><span class="opt-letter">B</span> Twice a week</button>
+          <button class="option-btn" onclick="selectOption(this, 'l9q2')"><span class="opt-letter">C</span> Every day</button>
+          <button class="option-btn" onclick="selectOption(this, 'l9q2')"><span class="opt-letter">D</span> Once a month</button>
+        </div>
+        <div class="feedback-msg" id="fb-l9q2"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q3.</span> How long did it take to play the first song?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l9q3')"><span class="opt-letter">A</span> One week</button>
+          <button class="option-btn" onclick="selectOption(this, 'l9q3')"><span class="opt-letter">B</span> One month</button>
+          <button class="option-btn" onclick="selectOption(this, 'l9q3')"><span class="opt-letter">C</span> Two months</button>
+          <button class="option-btn" onclick="selectOption(this, 'l9q3')"><span class="opt-letter">D</span> Six months</button>
+        </div>
+        <div class="feedback-msg" id="fb-l9q3"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q4.</span> What has the writer learned from this experience?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l9q4')"><span class="opt-letter">A</span> Guitar is easy</button>
+          <button class="option-btn" onclick="selectOption(this, 'l9q4')"><span class="opt-letter">B</span> Practice leads to progress</button>
+          <button class="option-btn" onclick="selectOption(this, 'l9q4')"><span class="opt-letter">C</span> Music lessons are expensive</button>
+          <button class="option-btn" onclick="selectOption(this, 'l9q4')"><span class="opt-letter">D</span> Family doesn't like music</button>
+        </div>
+        <div class="feedback-msg" id="fb-l9q4"></div>
+      </div>
+
+      <div class="quiz-actions">
+        <button class="btn-check" onclick="checkQuiz('l9', ['B','B','C','B'], 4)" id="check-l9">Check Answers</button>
+        <button class="btn-reset" onclick="resetQuiz('l9', 4)">Reset</button>
+        <div class="score-display" id="score-l9"><span class="score-num"></span></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+       LESSON 10  —  A2
+  ════════════════════════════════════════ -->
+  <div class="lesson-card" data-level="A2">
+    <div class="lesson-header">
+      <div>
+        <div class="lesson-meta">
+          <span class="badge badge-a2">A2</span>
+          <span class="badge badge-topic">Health</span>
+        </div>
+        <div class="lesson-title">A Visit to the Doctor</div>
+        <div class="lesson-arabic">زيارة الطبيب</div>
+      </div>
+    </div>
+
+    <div class="player">
+      <button class="transcript-toggle" onclick="toggleTranscript(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4 6h16M4 12h16M4 18h12"/></svg>
+        Show Transcript
+      </button>
+      <div class="player-text" id="text-l10">
+        Yesterday, I woke up with a sore throat and a headache. My mother took my temperature and saw that I had a slight fever. She decided to take me to the doctor. At the clinic, we waited about twenty minutes before the doctor called us in. The doctor checked my throat and listened to my chest. She said it was just a cold and nothing serious. She told me to drink plenty of water, rest at home, and take some medicine three times a day. I stayed home from school for two days. By the third day, I was feeling much better.
+      </div>
+      <div class="controls-row">
+        <button class="btn-play" onclick="playLesson(this, 'text-l10', 'indicator-l10')" title="Play audio">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button class="btn-replay" onclick="replayLesson('text-l10', 'indicator-l10')" title="Replay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-4.49"/></svg>
+        </button>
+        <div class="playing-indicator" id="indicator-l10">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="speed-group">
+          <span class="speed-label">Speed</span>
+          <button class="speed-btn active" onclick="setSpeed(0.75, this)">0.75×</button>
+          <button class="speed-btn" onclick="setSpeed(1, this)">1×</button>
+          <button class="speed-btn" onclick="setSpeed(1.25, this)">1.25×</button>
+        </div>
+      </div>
+
+      <button class="vocab-toggle" onclick="toggleVocab(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 4v16m8-8H4"/></svg>
+        Key Vocabulary · أهم الكلمات
+      </button>
+      <div class="vocab-box" id="vocab-l10">
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('sore throat')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">sore throat</span>
+            <span class="vocab-word-ar">التهاب الحلق</span>
+          </div>
+          <div class="vocab-example">I woke up with a <b>sore throat</b>.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('fever')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">fever</span>
+            <span class="vocab-word-ar">حمى</span>
+          </div>
+          <div class="vocab-example">My mother saw that I had a slight <b>fever</b>.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('clinic')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">clinic</span>
+            <span class="vocab-word-ar">عيادة</span>
+          </div>
+          <div class="vocab-example">We waited twenty minutes at the <b>clinic</b>.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('medicine')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">medicine</span>
+            <span class="vocab-word-ar">دواء</span>
+          </div>
+          <div class="vocab-example">I had to take some <b>medicine</b> three times a day.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('rest')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">rest</span>
+            <span class="vocab-word-ar">راحة</span>
+          </div>
+          <div class="vocab-example">She told me to <b>rest</b> at home.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-title">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        Comprehension Questions · أسئلة الفهم
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q1.</span> What symptoms did the writer have?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l10q1')"><span class="opt-letter">A</span> Stomach ache</button>
+          <button class="option-btn" onclick="selectOption(this, 'l10q1')"><span class="opt-letter">B</span> Sore throat and headache</button>
+          <button class="option-btn" onclick="selectOption(this, 'l10q1')"><span class="opt-letter">C</span> Broken arm</button>
+          <button class="option-btn" onclick="selectOption(this, 'l10q1')"><span class="opt-letter">D</span> Toothache</button>
+        </div>
+        <div class="feedback-msg" id="fb-l10q1"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q2.</span> How long did they wait at the clinic?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l10q2')"><span class="opt-letter">A</span> Ten minutes</button>
+          <button class="option-btn" onclick="selectOption(this, 'l10q2')"><span class="opt-letter">B</span> Twenty minutes</button>
+          <button class="option-btn" onclick="selectOption(this, 'l10q2')"><span class="opt-letter">C</span> Thirty minutes</button>
+          <button class="option-btn" onclick="selectOption(this, 'l10q2')"><span class="opt-letter">D</span> One hour</button>
+        </div>
+        <div class="feedback-msg" id="fb-l10q2"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q3.</span> What did the doctor say was the problem?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l10q3')"><span class="opt-letter">A</span> A serious infection</button>
+          <button class="option-btn" onclick="selectOption(this, 'l10q3')"><span class="opt-letter">B</span> Just a cold</button>
+          <button class="option-btn" onclick="selectOption(this, 'l10q3')"><span class="opt-letter">C</span> Food poisoning</button>
+          <button class="option-btn" onclick="selectOption(this, 'l10q3')"><span class="opt-letter">D</span> Allergy</button>
+        </div>
+        <div class="feedback-msg" id="fb-l10q3"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q4.</span> How many days did the writer stay home from school?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l10q4')"><span class="opt-letter">A</span> One day</button>
+          <button class="option-btn" onclick="selectOption(this, 'l10q4')"><span class="opt-letter">B</span> Two days</button>
+          <button class="option-btn" onclick="selectOption(this, 'l10q4')"><span class="opt-letter">C</span> Three days</button>
+          <button class="option-btn" onclick="selectOption(this, 'l10q4')"><span class="opt-letter">D</span> A week</button>
+        </div>
+        <div class="feedback-msg" id="fb-l10q4"></div>
+      </div>
+
+      <div class="quiz-actions">
+        <button class="btn-check" onclick="checkQuiz('l10', ['B','B','B','B'], 4)" id="check-l10">Check Answers</button>
+        <button class="btn-reset" onclick="resetQuiz('l10', 4)">Reset</button>
+        <div class="score-display" id="score-l10"><span class="score-num"></span></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+       LESSON 3  —  B1
+  ════════════════════════════════════════ -->
+  <p class="section-title">B1 · Intermediate Lessons</p>
+
+  <div class="lesson-card" data-level="B1">
+    <div class="lesson-header">
+      <div>
+        <div class="lesson-meta">
+          <span class="badge badge-b1">B1</span>
+          <span class="badge badge-topic">Environment</span>
+        </div>
+        <div class="lesson-title">The Importance of Recycling</div>
+        <div class="lesson-arabic">أهمية إعادة التدوير</div>
+      </div>
+    </div>
+
+    <div class="player">
+      <button class="transcript-toggle" onclick="toggleTranscript(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4 6h16M4 12h16M4 18h12"/></svg>
+        Show Transcript
+      </button>
+      <div class="player-text" id="text-l3">
+        Recycling is one of the most important things we can do for the environment. Every year, millions of tonnes of waste are sent to landfill sites, where they cause serious damage to the land and water around them. When we recycle materials like paper, plastic, and glass, we reduce the amount of waste that goes to these sites. This not only helps the environment but also saves energy. For example, making a new bottle from recycled glass uses around thirty percent less energy than making it from new materials. Many cities now have recycling programmes, and residents are encouraged to separate their rubbish into different bins. However, experts say that recycling alone is not enough. We also need to reduce the amount we consume and reuse items whenever possible.
+      </div>
+      <div class="controls-row">
+        <button class="btn-play" onclick="playLesson(this, 'text-l3', 'indicator-l3')" title="Play audio">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button class="btn-replay" onclick="replayLesson('text-l3', 'indicator-l3')" title="Replay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-4.49"/></svg>
+        </button>
+        <div class="playing-indicator" id="indicator-l3">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="speed-group">
+          <span class="speed-label">Speed</span>
+          <button class="speed-btn" onclick="setSpeed(0.75, this)">0.75×</button>
+          <button class="speed-btn active" onclick="setSpeed(1, this)">1×</button>
+          <button class="speed-btn" onclick="setSpeed(1.25, this)">1.25×</button>
+        </div>
+      </div>
+
+      <button class="vocab-toggle" onclick="toggleVocab(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 4v16m8-8H4"/></svg>
+        Key Vocabulary · أهم الكلمات
+      </button>
+      <div class="vocab-box" id="vocab-l3">
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('landfill')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">landfill</span>
+            <span class="vocab-word-ar">مكب نفايات</span>
+          </div>
+          <div class="vocab-example">Millions of tonnes of waste are sent to <b>landfill</b> sites.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('reduce')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">reduce</span>
+            <span class="vocab-word-ar">يقلل</span>
+          </div>
+          <div class="vocab-example">Recycling helps <b>reduce</b> the amount of waste.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('materials')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">materials</span>
+            <span class="vocab-word-ar">مواد</span>
+          </div>
+          <div class="vocab-example">We recycle <b>materials</b> like paper, plastic, and glass.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('residents')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">residents</span>
+            <span class="vocab-word-ar">سكان</span>
+          </div>
+          <div class="vocab-example"><b>Residents</b> are encouraged to separate their rubbish.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('consume')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">consume</span>
+            <span class="vocab-word-ar">يستهلك</span>
+          </div>
+          <div class="vocab-example">We need to reduce the amount we <b>consume</b>.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-title">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        Comprehension Questions · أسئلة الفهم
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q1.</span> What is the main problem with sending waste to landfill sites?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l3q1')"><span class="opt-letter">A</span> They take up too much space in cities</button>
+          <button class="option-btn" onclick="selectOption(this, 'l3q1')"><span class="opt-letter">B</span> They cause serious damage to land and water</button>
+          <button class="option-btn" onclick="selectOption(this, 'l3q1')"><span class="opt-letter">C</span> They are very expensive to run</button>
+          <button class="option-btn" onclick="selectOption(this, 'l3q1')"><span class="opt-letter">D</span> They produce too much noise</button>
+        </div>
+        <div class="feedback-msg" id="fb-l3q1"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q2.</span> How much less energy is used when making a new bottle from recycled glass?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l3q2')"><span class="opt-letter">A</span> About ten percent</button>
+          <button class="option-btn" onclick="selectOption(this, 'l3q2')"><span class="opt-letter">B</span> About twenty percent</button>
+          <button class="option-btn" onclick="selectOption(this, 'l3q2')"><span class="opt-letter">C</span> About thirty percent</button>
+          <button class="option-btn" onclick="selectOption(this, 'l3q2')"><span class="opt-letter">D</span> About fifty percent</button>
+        </div>
+        <div class="feedback-msg" id="fb-l3q2"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q3.</span> According to experts, what should we do besides recycling?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l3q3')"><span class="opt-letter">A</span> Buy more recycled products</button>
+          <button class="option-btn" onclick="selectOption(this, 'l3q3')"><span class="opt-letter">B</span> Support recycling programmes only</button>
+          <button class="option-btn" onclick="selectOption(this, 'l3q3')"><span class="opt-letter">C</span> Reduce consumption and reuse items</button>
+          <button class="option-btn" onclick="selectOption(this, 'l3q3')"><span class="opt-letter">D</span> Move landfill sites further from cities</button>
+        </div>
+        <div class="feedback-msg" id="fb-l3q3"></div>
+      </div>
+
+      <div class="quiz-actions">
+        <button class="btn-check" onclick="checkQuiz('l3', ['B','C','C'], 3)" id="check-l3">Check Answers</button>
+        <button class="btn-reset" onclick="resetQuiz('l3', 3)">Reset</button>
+        <div class="score-display" id="score-l3"><span class="score-num"></span></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+       LESSON 11  —  B1
+  ════════════════════════════════════════ -->
+  <div class="lesson-card" data-level="B1">
+    <div class="lesson-header">
+      <div>
+        <div class="lesson-meta">
+          <span class="badge badge-b1">B1</span>
+          <span class="badge badge-topic">Education</span>
+        </div>
+        <div class="lesson-title">Studying Abroad</div>
+        <div class="lesson-arabic">الدراسة في الخارج</div>
+      </div>
+    </div>
+
+    <div class="player">
+      <button class="transcript-toggle" onclick="toggleTranscript(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4 6h16M4 12h16M4 18h12"/></svg>
+        Show Transcript
+      </button>
+      <div class="player-text" id="text-l11">
+        More and more students today choose to study abroad for part of their education. This experience offers many benefits beyond academic knowledge. Living in a different country forces students to become more independent, as they must manage their own finances, cook their own meals, and solve problems without relying on their families. It also improves language skills dramatically, since students are surrounded by the language every day rather than only studying it in a classroom. Furthermore, studying abroad exposes young people to new cultures and ways of thinking, which can broaden their perspective on the world. Of course, the experience is not without challenges. Homesickness, cultural misunderstandings, and financial pressure are common difficulties that students face. Despite these obstacles, most students who study abroad describe it as one of the most valuable experiences of their lives.
+      </div>
+      <div class="controls-row">
+        <button class="btn-play" onclick="playLesson(this, 'text-l11', 'indicator-l11')" title="Play audio">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button class="btn-replay" onclick="replayLesson('text-l11', 'indicator-l11')" title="Replay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-4.49"/></svg>
+        </button>
+        <div class="playing-indicator" id="indicator-l11">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="speed-group">
+          <span class="speed-label">Speed</span>
+          <button class="speed-btn" onclick="setSpeed(0.75, this)">0.75×</button>
+          <button class="speed-btn active" onclick="setSpeed(1, this)">1×</button>
+          <button class="speed-btn" onclick="setSpeed(1.25, this)">1.25×</button>
+        </div>
+      </div>
+
+      <button class="vocab-toggle" onclick="toggleVocab(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 4v16m8-8H4"/></svg>
+        Key Vocabulary · أهم الكلمات
+      </button>
+      <div class="vocab-box" id="vocab-l11">
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('independent')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">independent</span>
+            <span class="vocab-word-ar">مستقل</span>
+          </div>
+          <div class="vocab-example">Living abroad forces students to become more <b>independent</b>.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('dramatically')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">dramatically</span>
+            <span class="vocab-word-ar">بشكل كبير</span>
+          </div>
+          <div class="vocab-example">It improves language skills <b>dramatically</b>.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('exposes')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">exposes</span>
+            <span class="vocab-word-ar">يُعرِّض / يكشف</span>
+          </div>
+          <div class="vocab-example">Studying abroad <b>exposes</b> young people to new cultures.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('perspective')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">perspective</span>
+            <span class="vocab-word-ar">منظور</span>
+          </div>
+          <div class="vocab-example">This can broaden their <b>perspective</b> on the world.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('homesickness')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">homesickness</span>
+            <span class="vocab-word-ar">الحنين إلى الوطن</span>
+          </div>
+          <div class="vocab-example"><b>Homesickness</b> is a common difficulty students face.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-title">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        Comprehension Questions · أسئلة الفهم
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q1.</span> According to the text, what does living abroad force students to do?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l11q1')"><span class="opt-letter">A</span> Study harder</button>
+          <button class="option-btn" onclick="selectOption(this, 'l11q1')"><span class="opt-letter">B</span> Become more independent</button>
+          <button class="option-btn" onclick="selectOption(this, 'l11q1')"><span class="opt-letter">C</span> Learn to drive</button>
+          <button class="option-btn" onclick="selectOption(this, 'l11q1')"><span class="opt-letter">D</span> Find a job</button>
+        </div>
+        <div class="feedback-msg" id="fb-l11q1"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q2.</span> Why do language skills improve dramatically while abroad?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l11q2')"><span class="opt-letter">A</span> Students take more exams</button>
+          <button class="option-btn" onclick="selectOption(this, 'l11q2')"><span class="opt-letter">B</span> Students are surrounded by the language daily</button>
+          <button class="option-btn" onclick="selectOption(this, 'l11q2')"><span class="opt-letter">C</span> Teachers are stricter</button>
+          <button class="option-btn" onclick="selectOption(this, 'l11q2')"><span class="opt-letter">D</span> Classes are longer</button>
+        </div>
+        <div class="feedback-msg" id="fb-l11q2"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q3.</span> What is mentioned as a common difficulty for students abroad?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l11q3')"><span class="opt-letter">A</span> Bad weather</button>
+          <button class="option-btn" onclick="selectOption(this, 'l11q3')"><span class="opt-letter">B</span> Homesickness</button>
+          <button class="option-btn" onclick="selectOption(this, 'l11q3')"><span class="opt-letter">C</span> Lack of universities</button>
+          <button class="option-btn" onclick="selectOption(this, 'l11q3')"><span class="opt-letter">D</span> Poor internet</button>
+        </div>
+        <div class="feedback-msg" id="fb-l11q3"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q4.</span> How do most students describe their experience abroad?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l11q4')"><span class="opt-letter">A</span> Disappointing</button>
+          <button class="option-btn" onclick="selectOption(this, 'l11q4')"><span class="opt-letter">B</span> Too difficult</button>
+          <button class="option-btn" onclick="selectOption(this, 'l11q4')"><span class="opt-letter">C</span> One of the most valuable experiences</button>
+          <button class="option-btn" onclick="selectOption(this, 'l11q4')"><span class="opt-letter">D</span> Not worth the cost</button>
+        </div>
+        <div class="feedback-msg" id="fb-l11q4"></div>
+      </div>
+
+      <div class="quiz-actions">
+        <button class="btn-check" onclick="checkQuiz('l11', ['B','B','B','C'], 4)" id="check-l11">Check Answers</button>
+        <button class="btn-reset" onclick="resetQuiz('l11', 4)">Reset</button>
+        <div class="score-display" id="score-l11"><span class="score-num"></span></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+       LESSON 12  —  B1
+  ════════════════════════════════════════ -->
+  <div class="lesson-card" data-level="B1">
+    <div class="lesson-header">
+      <div>
+        <div class="lesson-meta">
+          <span class="badge badge-b1">B1</span>
+          <span class="badge badge-topic">Technology</span>
+        </div>
+        <div class="lesson-title">How Smartphones Changed Our Lives</div>
+        <div class="lesson-arabic">كيف غيرت الهواتف الذكية حياتنا</div>
+      </div>
+    </div>
+
+    <div class="player">
+      <button class="transcript-toggle" onclick="toggleTranscript(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4 6h16M4 12h16M4 18h12"/></svg>
+        Show Transcript
+      </button>
+      <div class="player-text" id="text-l12">
+        It is hard to imagine daily life without a smartphone. In just over a decade, these devices have transformed the way we communicate, work, and entertain ourselves. Instead of carrying separate devices for calling, taking photos, or listening to music, people now rely on a single device that fits in their pocket. Smartphones have also changed how we access information; instead of searching through books or asking someone directly, we simply type a question into a search engine. This constant connectivity, however, comes with drawbacks. Many people report feeling anxious when they are separated from their phones, a condition sometimes called nomophobia. Additionally, excessive screen time has been linked to poor sleep and reduced face-to-face social interaction. Despite these concerns, it seems unlikely that smartphones will become less important in our lives anytime soon.
+      </div>
+      <div class="controls-row">
+        <button class="btn-play" onclick="playLesson(this, 'text-l12', 'indicator-l12')" title="Play audio">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button class="btn-replay" onclick="replayLesson('text-l12', 'indicator-l12')" title="Replay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-4.49"/></svg>
+        </button>
+        <div class="playing-indicator" id="indicator-l12">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="speed-group">
+          <span class="speed-label">Speed</span>
+          <button class="speed-btn" onclick="setSpeed(0.75, this)">0.75×</button>
+          <button class="speed-btn active" onclick="setSpeed(1, this)">1×</button>
+          <button class="speed-btn" onclick="setSpeed(1.25, this)">1.25×</button>
+        </div>
+      </div>
+
+      <button class="vocab-toggle" onclick="toggleVocab(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 4v16m8-8H4"/></svg>
+        Key Vocabulary · أهم الكلمات
+      </button>
+      <div class="vocab-box" id="vocab-l12">
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('transformed')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">transformed</span>
+            <span class="vocab-word-ar">غيّر / حوّل</span>
+          </div>
+          <div class="vocab-example">Smartphones have <b>transformed</b> the way we communicate.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('rely on')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">rely on</span>
+            <span class="vocab-word-ar">يعتمد على</span>
+          </div>
+          <div class="vocab-example">People now <b>rely on</b> a single device.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('connectivity')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">connectivity</span>
+            <span class="vocab-word-ar">الاتصال / الترابط</span>
+          </div>
+          <div class="vocab-example">This constant <b>connectivity</b> comes with drawbacks.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('anxious')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">anxious</span>
+            <span class="vocab-word-ar">قلق</span>
+          </div>
+          <div class="vocab-example">Many people feel <b>anxious</b> without their phones.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('excessive')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">excessive</span>
+            <span class="vocab-word-ar">مفرط</span>
+          </div>
+          <div class="vocab-example"><b>Excessive</b> screen time affects sleep.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-title">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        Comprehension Questions · أسئلة الفهم
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q1.</span> What have smartphones replaced, according to the text?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l12q1')"><span class="opt-letter">A</span> Computers</button>
+          <button class="option-btn" onclick="selectOption(this, 'l12q1')"><span class="opt-letter">B</span> Separate devices like cameras and music players</button>
+          <button class="option-btn" onclick="selectOption(this, 'l12q1')"><span class="opt-letter">C</span> Televisions</button>
+          <button class="option-btn" onclick="selectOption(this, 'l12q1')"><span class="opt-letter">D</span> Newspapers only</button>
+        </div>
+        <div class="feedback-msg" id="fb-l12q1"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q2.</span> How has information access changed because of smartphones?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l12q2')"><span class="opt-letter">A</span> People read more books</button>
+          <button class="option-btn" onclick="selectOption(this, 'l12q2')"><span class="opt-letter">B</span> People ask friends more often</button>
+          <button class="option-btn" onclick="selectOption(this, 'l12q2')"><span class="opt-letter">C</span> People search engines instead of books</button>
+          <button class="option-btn" onclick="selectOption(this, 'l12q2')"><span class="opt-letter">D</span> Information is harder to find</button>
+        </div>
+        <div class="feedback-msg" id="fb-l12q2"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q3.</span> What is nomophobia?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l12q3')"><span class="opt-letter">A</span> Fear of smartphones breaking</button>
+          <button class="option-btn" onclick="selectOption(this, 'l12q3')"><span class="opt-letter">B</span> Anxiety about being without your phone</button>
+          <button class="option-btn" onclick="selectOption(this, 'l12q3')"><span class="opt-letter">C</span> A type of phone virus</button>
+          <button class="option-btn" onclick="selectOption(this, 'l12q3')"><span class="opt-letter">D</span> Fear of losing data</button>
+        </div>
+        <div class="feedback-msg" id="fb-l12q3"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q4.</span> What has excessive screen time been linked to?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l12q4')"><span class="opt-letter">A</span> Better grades</button>
+          <button class="option-btn" onclick="selectOption(this, 'l12q4')"><span class="opt-letter">B</span> Poor sleep and less social interaction</button>
+          <button class="option-btn" onclick="selectOption(this, 'l12q4')"><span class="opt-letter">C</span> Improved memory</button>
+          <button class="option-btn" onclick="selectOption(this, 'l12q4')"><span class="opt-letter">D</span> Faster typing</button>
+        </div>
+        <div class="feedback-msg" id="fb-l12q4"></div>
+      </div>
+
+      <div class="quiz-actions">
+        <button class="btn-check" onclick="checkQuiz('l12', ['B','C','B','B'], 4)" id="check-l12">Check Answers</button>
+        <button class="btn-reset" onclick="resetQuiz('l12', 4)">Reset</button>
+        <div class="score-display" id="score-l12"><span class="score-num"></span></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+       LESSON 13  —  B1
+  ════════════════════════════════════════ -->
+  <div class="lesson-card" data-level="B1">
+    <div class="lesson-header">
+      <div>
+        <div class="lesson-meta">
+          <span class="badge badge-b1">B1</span>
+          <span class="badge badge-topic">Sports &amp; Health</span>
+        </div>
+        <div class="lesson-title">The Benefits of Regular Exercise</div>
+        <div class="lesson-arabic">فوائد ممارسة الرياضة بانتظام</div>
+      </div>
+    </div>
+
+    <div class="player">
+      <button class="transcript-toggle" onclick="toggleTranscript(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4 6h16M4 12h16M4 18h12"/></svg>
+        Show Transcript
+      </button>
+      <div class="player-text" id="text-l13">
+        Doctors and health experts consistently recommend that adults engage in regular physical activity, and the reasons are well supported by research. Exercise strengthens the heart and lungs, improves blood circulation, and helps maintain a healthy body weight. Beyond the physical benefits, regular exercise has a powerful effect on mental health. Studies show that even a thirty-minute walk can reduce symptoms of stress and anxiety by releasing chemicals in the brain called endorphins. Exercise also improves sleep quality and boosts energy levels throughout the day. Unfortunately, many people struggle to maintain a consistent routine due to busy schedules or lack of motivation. Experts suggest starting with small, achievable goals, such as a ten-minute walk each day, and gradually increasing the intensity and duration over time.
+      </div>
+      <div class="controls-row">
+        <button class="btn-play" onclick="playLesson(this, 'text-l13', 'indicator-l13')" title="Play audio">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button class="btn-replay" onclick="replayLesson('text-l13', 'indicator-l13')" title="Replay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-4.49"/></svg>
+        </button>
+        <div class="playing-indicator" id="indicator-l13">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="speed-group">
+          <span class="speed-label">Speed</span>
+          <button class="speed-btn" onclick="setSpeed(0.75, this)">0.75×</button>
+          <button class="speed-btn active" onclick="setSpeed(1, this)">1×</button>
+          <button class="speed-btn" onclick="setSpeed(1.25, this)">1.25×</button>
+        </div>
+      </div>
+
+      <button class="vocab-toggle" onclick="toggleVocab(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 4v16m8-8H4"/></svg>
+        Key Vocabulary · أهم الكلمات
+      </button>
+      <div class="vocab-box" id="vocab-l13">
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('circulation')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">circulation</span>
+            <span class="vocab-word-ar">الدورة الدموية</span>
+          </div>
+          <div class="vocab-example">Exercise improves blood <b>circulation</b>.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('mental health')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">mental health</span>
+            <span class="vocab-word-ar">الصحة النفسية</span>
+          </div>
+          <div class="vocab-example">Regular exercise has a powerful effect on <b>mental health</b>.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('endorphins')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">endorphins</span>
+            <span class="vocab-word-ar">الإندورفين</span>
+          </div>
+          <div class="vocab-example">The brain releases chemicals called <b>endorphins</b>.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('consistent')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">consistent</span>
+            <span class="vocab-word-ar">منتظم / ثابت</span>
+          </div>
+          <div class="vocab-example">Many people struggle to maintain a <b>consistent</b> routine.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('motivation')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">motivation</span>
+            <span class="vocab-word-ar">دافع / حافز</span>
+          </div>
+          <div class="vocab-example">Some people lack <b>motivation</b> to exercise.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-title">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        Comprehension Questions · أسئلة الفهم
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q1.</span> What physical benefit does exercise provide?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l13q1')"><span class="opt-letter">A</span> Improved eyesight</button>
+          <button class="option-btn" onclick="selectOption(this, 'l13q1')"><span class="opt-letter">B</span> Strengthens the heart and lungs</button>
+          <button class="option-btn" onclick="selectOption(this, 'l13q1')"><span class="opt-letter">C</span> Taller height</button>
+          <button class="option-btn" onclick="selectOption(this, 'l13q1')"><span class="opt-letter">D</span> Better handwriting</button>
+        </div>
+        <div class="feedback-msg" id="fb-l13q1"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q2.</span> What can a thirty-minute walk help reduce?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l13q2')"><span class="opt-letter">A</span> Blood pressure only</button>
+          <button class="option-btn" onclick="selectOption(this, 'l13q2')"><span class="opt-letter">B</span> Stress and anxiety</button>
+          <button class="option-btn" onclick="selectOption(this, 'l13q2')"><span class="opt-letter">C</span> Appetite</button>
+          <button class="option-btn" onclick="selectOption(this, 'l13q2')"><span class="opt-letter">D</span> Body temperature</button>
+        </div>
+        <div class="feedback-msg" id="fb-l13q2"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q3.</span> What are endorphins?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l13q3')"><span class="opt-letter">A</span> A type of exercise</button>
+          <button class="option-btn" onclick="selectOption(this, 'l13q3')"><span class="opt-letter">B</span> Chemicals released by the brain</button>
+          <button class="option-btn" onclick="selectOption(this, 'l13q3')"><span class="opt-letter">C</span> A medical condition</button>
+          <button class="option-btn" onclick="selectOption(this, 'l13q3')"><span class="opt-letter">D</span> A piece of gym equipment</button>
+        </div>
+        <div class="feedback-msg" id="fb-l13q3"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q4.</span> What do experts suggest for people who struggle with exercise routines?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l13q4')"><span class="opt-letter">A</span> Join an expensive gym</button>
+          <button class="option-btn" onclick="selectOption(this, 'l13q4')"><span class="opt-letter">B</span> Start with small, achievable goals</button>
+          <button class="option-btn" onclick="selectOption(this, 'l13q4')"><span class="opt-letter">C</span> Exercise only on weekends</button>
+          <button class="option-btn" onclick="selectOption(this, 'l13q4')"><span class="opt-letter">D</span> Avoid exercise if busy</button>
+        </div>
+        <div class="feedback-msg" id="fb-l13q4"></div>
+      </div>
+
+      <div class="quiz-actions">
+        <button class="btn-check" onclick="checkQuiz('l13', ['B','B','B','B'], 4)" id="check-l13">Check Answers</button>
+        <button class="btn-reset" onclick="resetQuiz('l13', 4)">Reset</button>
+        <div class="score-display" id="score-l13"><span class="score-num"></span></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+       LESSON 4  —  B2
+  ════════════════════════════════════════ -->
+  <p class="section-title">B2 · Upper-Intermediate Lessons</p>
+
+  <div class="lesson-card" data-level="B2">
+    <div class="lesson-header">
+      <div>
+        <div class="lesson-meta">
+          <span class="badge badge-b2">B2</span>
+          <span class="badge badge-topic">Technology &amp; Society</span>
+        </div>
+        <div class="lesson-title">The Rise of Remote Work</div>
+        <div class="lesson-arabic">صعود العمل عن بُعد</div>
+      </div>
+    </div>
+
+    <div class="player">
+      <button class="transcript-toggle" onclick="toggleTranscript(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4 6h16M4 12h16M4 18h12"/></svg>
+        Show Transcript
+      </button>
+      <div class="player-text" id="text-l4">
+        The shift towards remote work has fundamentally changed the way millions of people approach their professional lives. What began as a temporary response to a global health crisis has, for many organisations, become a permanent feature of the modern workplace. Proponents argue that working from home increases productivity, reduces commuting time, and gives employees greater flexibility to manage their personal lives. However, critics point to several drawbacks. Social isolation can negatively affect mental health, particularly for those who live alone. Furthermore, the boundaries between work and personal life often become blurred, leading to longer working hours and increased stress. Companies, too, face challenges: maintaining a strong team culture and ensuring effective collaboration are harder when staff members rarely meet in person. The debate is unlikely to be resolved anytime soon, as both employers and employees continue to weigh the benefits against the costs.
+      </div>
+      <div class="controls-row">
+        <button class="btn-play" onclick="playLesson(this, 'text-l4', 'indicator-l4')" title="Play audio">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button class="btn-replay" onclick="replayLesson('text-l4', 'indicator-l4')" title="Replay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-4.49"/></svg>
+        </button>
+        <div class="playing-indicator" id="indicator-l4">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="speed-group">
+          <span class="speed-label">Speed</span>
+          <button class="speed-btn" onclick="setSpeed(0.75, this)">0.75×</button>
+          <button class="speed-btn active" onclick="setSpeed(1, this)">1×</button>
+          <button class="speed-btn" onclick="setSpeed(1.25, this)">1.25×</button>
+        </div>
+      </div>
+
+      <button class="vocab-toggle" onclick="toggleVocab(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 4v16m8-8H4"/></svg>
+        Key Vocabulary · أهم الكلمات
+      </button>
+      <div class="vocab-box" id="vocab-l4">
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('fundamentally')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">fundamentally</span>
+            <span class="vocab-word-ar">بشكل جوهري</span>
+          </div>
+          <div class="vocab-example">Remote work has <b>fundamentally</b> changed professional life.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('proponents')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">proponents</span>
+            <span class="vocab-word-ar">مؤيدون</span>
+          </div>
+          <div class="vocab-example"><b>Proponents</b> argue that it increases productivity.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('isolation')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">isolation</span>
+            <span class="vocab-word-ar">عزلة</span>
+          </div>
+          <div class="vocab-example">Social <b>isolation</b> can negatively affect mental health.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('blurred')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">blurred</span>
+            <span class="vocab-word-ar">غير واضح/ضبابي</span>
+          </div>
+          <div class="vocab-example">The boundaries between work and life become <b>blurred</b>.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('collaboration')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">collaboration</span>
+            <span class="vocab-word-ar">تعاون</span>
+          </div>
+          <div class="vocab-example">Effective <b>collaboration</b> is harder without in-person meetings.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-title">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        Comprehension Questions · أسئلة الفهم
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q1.</span> How did widespread remote work originally begin, according to the passage?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l4q1')"><span class="opt-letter">A</span> As a planned long-term strategy by companies</button>
+          <button class="option-btn" onclick="selectOption(this, 'l4q1')"><span class="opt-letter">B</span> As a response to a global health crisis</button>
+          <button class="option-btn" onclick="selectOption(this, 'l4q1')"><span class="opt-letter">C</span> As a demand from workers seeking flexibility</button>
+          <button class="option-btn" onclick="selectOption(this, 'l4q1')"><span class="opt-letter">D</span> As a result of advances in technology</button>
+        </div>
+        <div class="feedback-msg" id="fb-l4q1"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q2.</span> Which of the following is mentioned as a disadvantage of working from home?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l4q2')"><span class="opt-letter">A</span> Reduced productivity levels</button>
+          <button class="option-btn" onclick="selectOption(this, 'l4q2')"><span class="opt-letter">B</span> Higher commuting costs</button>
+          <button class="option-btn" onclick="selectOption(this, 'l4q2')"><span class="opt-letter">C</span> Social isolation affecting mental health</button>
+          <button class="option-btn" onclick="selectOption(this, 'l4q2')"><span class="opt-letter">D</span> Lack of access to technology</button>
+        </div>
+        <div class="feedback-msg" id="fb-l4q2"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q3.</span> What challenge do companies face with remote work?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l4q3')"><span class="opt-letter">A</span> Paying higher salaries to remote workers</button>
+          <button class="option-btn" onclick="selectOption(this, 'l4q3')"><span class="opt-letter">B</span> Finding enough office space</button>
+          <button class="option-btn" onclick="selectOption(this, 'l4q3')"><span class="opt-letter">C</span> Maintaining team culture and collaboration</button>
+          <button class="option-btn" onclick="selectOption(this, 'l4q3')"><span class="opt-letter">D</span> Complying with government regulations</button>
+        </div>
+        <div class="feedback-msg" id="fb-l4q3"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q4.</span> What does the phrase "the boundaries become blurred" mean in context?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l4q4')"><span class="opt-letter">A</span> The office walls are removed</button>
+          <button class="option-btn" onclick="selectOption(this, 'l4q4')"><span class="opt-letter">B</span> The difference between work time and personal time becomes unclear</button>
+          <button class="option-btn" onclick="selectOption(this, 'l4q4')"><span class="opt-letter">C</span> Workers forget about their job responsibilities</button>
+          <button class="option-btn" onclick="selectOption(this, 'l4q4')"><span class="opt-letter">D</span> The company's goals are not clear</button>
+        </div>
+        <div class="feedback-msg" id="fb-l4q4"></div>
+      </div>
+
+      <div class="quiz-actions">
+        <button class="btn-check" onclick="checkQuiz('l4', ['B','C','C','B'], 4)" id="check-l4">Check Answers</button>
+        <button class="btn-reset" onclick="resetQuiz('l4', 4)">Reset</button>
+        <div class="score-display" id="score-l4"><span class="score-num"></span></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+       LESSON 14  —  B2
+  ════════════════════════════════════════ -->
+  <div class="lesson-card" data-level="B2">
+    <div class="lesson-header">
+      <div>
+        <div class="lesson-meta">
+          <span class="badge badge-b2">B2</span>
+          <span class="badge badge-topic">Social Media</span>
+        </div>
+        <div class="lesson-title">The Double-Edged Sword of Social Media</div>
+        <div class="lesson-arabic">السيف ذو الحدين: وسائل التواصل الاجتماعي</div>
+      </div>
+    </div>
+
+    <div class="player">
+      <button class="transcript-toggle" onclick="toggleTranscript(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4 6h16M4 12h16M4 18h12"/></svg>
+        Show Transcript
+      </button>
+      <div class="player-text" id="text-l14">
+        Social media platforms have fundamentally reshaped how people communicate, share information, and perceive the world around them. On one hand, these platforms have democratised access to information, allowing ordinary individuals to broadcast their opinions to a global audience and enabling social movements to organise with unprecedented speed. Small businesses, too, have benefited enormously, using platforms to reach customers without the marketing budgets that were once required. On the other hand, critics argue that social media has contributed to a rise in misinformation, as content can spread rapidly regardless of its accuracy. There are also growing concerns about the impact on mental wellbeing, particularly among younger users, who may compare their lives unfavourably to the curated, idealised versions of reality presented online. Researchers continue to debate whether the benefits of connectivity outweigh these psychological and societal costs, and it is likely that the conversation will continue as these platforms keep evolving.
+      </div>
+      <div class="controls-row">
+        <button class="btn-play" onclick="playLesson(this, 'text-l14', 'indicator-l14')" title="Play audio">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button class="btn-replay" onclick="replayLesson('text-l14', 'indicator-l14')" title="Replay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-4.49"/></svg>
+        </button>
+        <div class="playing-indicator" id="indicator-l14">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="speed-group">
+          <span class="speed-label">Speed</span>
+          <button class="speed-btn" onclick="setSpeed(0.75, this)">0.75×</button>
+          <button class="speed-btn active" onclick="setSpeed(1, this)">1×</button>
+          <button class="speed-btn" onclick="setSpeed(1.25, this)">1.25×</button>
+        </div>
+      </div>
+
+      <button class="vocab-toggle" onclick="toggleVocab(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 4v16m8-8H4"/></svg>
+        Key Vocabulary · أهم الكلمات
+      </button>
+      <div class="vocab-box" id="vocab-l14">
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('reshaped')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">reshaped</span>
+            <span class="vocab-word-ar">أعاد تشكيل</span>
+          </div>
+          <div class="vocab-example">Social media has <b>reshaped</b> how people communicate.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('democratised')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">democratised</span>
+            <span class="vocab-word-ar">جعله متاحاً للجميع</span>
+          </div>
+          <div class="vocab-example">These platforms have <b>democratised</b> access to information.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('unprecedented')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">unprecedented</span>
+            <span class="vocab-word-ar">غير مسبوق</span>
+          </div>
+          <div class="vocab-example">Movements can organise with <b>unprecedented</b> speed.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('misinformation')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">misinformation</span>
+            <span class="vocab-word-ar">معلومات مضللة</span>
+          </div>
+          <div class="vocab-example">Social media has contributed to a rise in <b>misinformation</b>.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('curated')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">curated</span>
+            <span class="vocab-word-ar">منسّق / منتقى بعناية</span>
+          </div>
+          <div class="vocab-example">People compare their lives to <b>curated</b>, idealised versions online.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-title">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        Comprehension Questions · أسئلة الفهم
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q1.</span> According to the text, how have small businesses benefited from social media?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l14q1')"><span class="opt-letter">A</span> They pay less tax</button>
+          <button class="option-btn" onclick="selectOption(this, 'l14q1')"><span class="opt-letter">B</span> They reach customers without large marketing budgets</button>
+          <button class="option-btn" onclick="selectOption(this, 'l14q1')"><span class="opt-letter">C</span> They avoid competition</button>
+          <button class="option-btn" onclick="selectOption(this, 'l14q1')"><span class="opt-letter">D</span> They get free products</button>
+        </div>
+        <div class="feedback-msg" id="fb-l14q1"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q2.</span> What is one criticism mentioned about social media?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l14q2')"><span class="opt-letter">A</span> It is too expensive</button>
+          <button class="option-btn" onclick="selectOption(this, 'l14q2')"><span class="opt-letter">B</span> It contributes to misinformation</button>
+          <button class="option-btn" onclick="selectOption(this, 'l14q2')"><span class="opt-letter">C</span> It requires too much technical skill</button>
+          <button class="option-btn" onclick="selectOption(this, 'l14q2')"><span class="opt-letter">D</span> It has no impact on businesses</button>
+        </div>
+        <div class="feedback-msg" id="fb-l14q2"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q3.</span> Why might younger users feel negatively affected by social media?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l14q3')"><span class="opt-letter">A</span> They spend money on it</button>
+          <button class="option-btn" onclick="selectOption(this, 'l14q3')"><span class="opt-letter">B</span> They compare their lives to idealised versions online</button>
+          <button class="option-btn" onclick="selectOption(this, 'l14q3')"><span class="opt-letter">C</span> They cannot access it easily</button>
+          <button class="option-btn" onclick="selectOption(this, 'l14q3')"><span class="opt-letter">D</span> They dislike the design</button>
+        </div>
+        <div class="feedback-msg" id="fb-l14q3"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q4.</span> What does the text suggest about the future debate on social media?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l14q4')"><span class="opt-letter">A</span> It will end soon</button>
+          <button class="option-btn" onclick="selectOption(this, 'l14q4')"><span class="opt-letter">B</span> It is likely to continue as platforms evolve</button>
+          <button class="option-btn" onclick="selectOption(this, 'l14q4')"><span class="opt-letter">C</span> Researchers have already agreed</button>
+          <button class="option-btn" onclick="selectOption(this, 'l14q4')"><span class="opt-letter">D</span> It has already been resolved</button>
+        </div>
+        <div class="feedback-msg" id="fb-l14q4"></div>
+      </div>
+
+      <div class="quiz-actions">
+        <button class="btn-check" onclick="checkQuiz('l14', ['B','B','B','B'], 4)" id="check-l14">Check Answers</button>
+        <button class="btn-reset" onclick="resetQuiz('l14', 4)">Reset</button>
+        <div class="score-display" id="score-l14"><span class="score-num"></span></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+       LESSON 15  —  B2
+  ════════════════════════════════════════ -->
+  <div class="lesson-card" data-level="B2">
+    <div class="lesson-header">
+      <div>
+        <div class="lesson-meta">
+          <span class="badge badge-b2">B2</span>
+          <span class="badge badge-topic">Environment</span>
+        </div>
+        <div class="lesson-title">Understanding Climate Change</div>
+        <div class="lesson-arabic">فهم التغير المناخي</div>
+      </div>
+    </div>
+
+    <div class="player">
+      <button class="transcript-toggle" onclick="toggleTranscript(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4 6h16M4 12h16M4 18h12"/></svg>
+        Show Transcript
+      </button>
+      <div class="player-text" id="text-l15">
+        Climate change refers to long-term shifts in temperatures and weather patterns, largely driven by human activities since the industrial era, particularly the burning of fossil fuels. This process releases greenhouse gases that trap heat in the atmosphere, leading to a gradual rise in global temperatures. The consequences are already visible: more frequent and intense heatwaves, rising sea levels, and disruptions to ecosystems that many species depend on for survival. Scientists warn that without significant reductions in emissions, these effects will worsen considerably over the coming decades. Addressing the issue requires coordinated action on multiple fronts, including transitioning to renewable energy sources, improving energy efficiency, and protecting forests, which absorb carbon dioxide from the atmosphere. While international agreements have set ambitious targets, progress varies widely between countries, and many experts argue that current efforts remain insufficient to prevent the most severe outcomes.
+      </div>
+      <div class="controls-row">
+        <button class="btn-play" onclick="playLesson(this, 'text-l15', 'indicator-l15')" title="Play audio">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button class="btn-replay" onclick="replayLesson('text-l15', 'indicator-l15')" title="Replay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-4.49"/></svg>
+        </button>
+        <div class="playing-indicator" id="indicator-l15">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="speed-group">
+          <span class="speed-label">Speed</span>
+          <button class="speed-btn" onclick="setSpeed(0.75, this)">0.75×</button>
+          <button class="speed-btn active" onclick="setSpeed(1, this)">1×</button>
+          <button class="speed-btn" onclick="setSpeed(1.25, this)">1.25×</button>
+        </div>
+      </div>
+
+      <button class="vocab-toggle" onclick="toggleVocab(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 4v16m8-8H4"/></svg>
+        Key Vocabulary · أهم الكلمات
+      </button>
+      <div class="vocab-box" id="vocab-l15">
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('greenhouse gases')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">greenhouse gases</span>
+            <span class="vocab-word-ar">الغازات الدفيئة</span>
+          </div>
+          <div class="vocab-example">Burning fossil fuels releases <b>greenhouse gases</b>.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('atmosphere')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">atmosphere</span>
+            <span class="vocab-word-ar">الغلاف الجوي</span>
+          </div>
+          <div class="vocab-example">These gases trap heat in the <b>atmosphere</b>.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('ecosystems')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">ecosystems</span>
+            <span class="vocab-word-ar">الأنظمة البيئية</span>
+          </div>
+          <div class="vocab-example">Rising temperatures disrupt <b>ecosystems</b>.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('emissions')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">emissions</span>
+            <span class="vocab-word-ar">الانبعاثات</span>
+          </div>
+          <div class="vocab-example">Countries must reduce their <b>emissions</b>.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-head">
+            <button class="btn-play-small" onclick="speakSentence('renewable')" title="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="vocab-word">renewable</span>
+            <span class="vocab-word-ar">متجدد</span>
+          </div>
+          <div class="vocab-example">We need to transition to <b>renewable</b> energy sources.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-title">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        Comprehension Questions · أسئلة الفهم
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q1.</span> What is the main cause of climate change mentioned in the text?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l15q1')"><span class="opt-letter">A</span> Volcanic eruptions</button>
+          <button class="option-btn" onclick="selectOption(this, 'l15q1')"><span class="opt-letter">B</span> Burning of fossil fuels</button>
+          <button class="option-btn" onclick="selectOption(this, 'l15q1')"><span class="opt-letter">C</span> Ocean currents</button>
+          <button class="option-btn" onclick="selectOption(this, 'l15q1')"><span class="opt-letter">D</span> Solar flares</button>
+        </div>
+        <div class="feedback-msg" id="fb-l15q1"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q2.</span> What effect do greenhouse gases have?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l15q2')"><span class="opt-letter">A</span> They cool the planet</button>
+          <button class="option-btn" onclick="selectOption(this, 'l15q2')"><span class="opt-letter">B</span> They trap heat in the atmosphere</button>
+          <button class="option-btn" onclick="selectOption(this, 'l15q2')"><span class="opt-letter">C</span> They create more rain</button>
+          <button class="option-btn" onclick="selectOption(this, 'l15q2')"><span class="opt-letter">D</span> They reduce sea levels</button>
+        </div>
+        <div class="feedback-msg" id="fb-l15q2"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q3.</span> Which of these is mentioned as a visible consequence of climate change?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l15q3')"><span class="opt-letter">A</span> Fewer earthquakes</button>
+          <button class="option-btn" onclick="selectOption(this, 'l15q3')"><span class="opt-letter">B</span> Rising sea levels</button>
+          <button class="option-btn" onclick="selectOption(this, 'l15q3')"><span class="opt-letter">C</span> Cooler summers</button>
+          <button class="option-btn" onclick="selectOption(this, 'l15q3')"><span class="opt-letter">D</span> More forests</button>
+        </div>
+        <div class="feedback-msg" id="fb-l15q3"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-text"><span class="question-num">Q4.</span> What role do forests play according to the text?</div>
+        <div class="options">
+          <button class="option-btn" onclick="selectOption(this, 'l15q4')"><span class="opt-letter">A</span> They release greenhouse gases</button>
+          <button class="option-btn" onclick="selectOption(this, 'l15q4')"><span class="opt-letter">B</span> They absorb carbon dioxide</button>
+          <button class="option-btn" onclick="selectOption(this, 'l15q4')"><span class="opt-letter">C</span> They increase temperatures</button>
+          <button class="option-btn" onclick="selectOption(this, 'l15q4')"><span class="opt-letter">D</span> They have no effect</button>
+        </div>
+        <div class="feedback-msg" id="fb-l15q4"></div>
+      </div>
+
+      <div class="quiz-actions">
+        <button class="btn-check" onclick="checkQuiz('l15', ['B','B','B','B'], 4)" id="check-l15">Check Answers</button>
+        <button class="btn-reset" onclick="resetQuiz('l15', 4)">Reset</button>
+        <div class="score-display" id="score-l15"><span class="score-num"></span></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+       DICTATION DRILL
+  ════════════════════════════════════════ -->
+  <p class="section-title">Dictation Drill · تمرين الإملاء</p>
+
+  <div class="tip-box">
+    <span class="tip-icon">🎯</span>
+    <div>
+      <strong style="color:var(--ink)">Dictation tip:</strong>
+      Press the speaker button next to each sentence. Listen and type exactly what you hear — then press <em style="color:var(--wave)">Check</em>.
+      <span class="tip-arabic">اضغط على أيقونة الصوت بجانب كل جملة. استمع واكتب بالضبط ما سمعته — ثم اضغط تحقق.</span>
+    </div>
+  </div>
+
+  <div class="dictation-card">
+    <h3>Beginner Sentences · A1–A2</h3>
+    <p class="dictation-arabic">جمل للمبتدئين — استمع واكتب</p>
+
+    <div class="dictation-sentence">
+      <div class="sentence-num">1</div>
+      <button class="btn-play-small" onclick="speakSentence('She drinks a glass of water every morning.')" title="Play">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <input class="dictation-input" id="dict-1" placeholder="Type what you hear…">
+      <span class="dictation-reveal" id="reveal-1">Answer: <span class="answer-text">She drinks a glass of water every morning.</span></span>
+    </div>
+
+    <div class="dictation-sentence">
+      <div class="sentence-num">2</div>
+      <button class="btn-play-small" onclick="speakSentence('My brother goes to school by bus.')" title="Play">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <input class="dictation-input" id="dict-2" placeholder="Type what you hear…">
+      <span class="dictation-reveal" id="reveal-2">Answer: <span class="answer-text">My brother goes to school by bus.</span></span>
+    </div>
+
+    <div class="dictation-sentence">
+      <div class="sentence-num">3</div>
+      <button class="btn-play-small" onclick="speakSentence('The weather is cold and it is raining outside.')" title="Play">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <input class="dictation-input" id="dict-3" placeholder="Type what you hear…">
+      <span class="dictation-reveal" id="reveal-3">Answer: <span class="answer-text">The weather is cold and it is raining outside.</span></span>
+    </div>
+
+    <div class="dictation-sentence">
+      <div class="sentence-num">4</div>
+      <button class="btn-play-small" onclick="speakSentence('I like to read books in the evening.')" title="Play">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <input class="dictation-input" id="dict-4" placeholder="Type what you hear…">
+      <span class="dictation-reveal" id="reveal-4">Answer: <span class="answer-text">I like to read books in the evening.</span></span>
+    </div>
+
+    <button class="btn-check-dict" onclick="checkDictation(['She drinks a glass of water every morning.','My brother goes to school by bus.','The weather is cold and it is raining outside.','I like to read books in the evening.'], 4)">Check Dictation</button>
+  </div>
+
+  <div class="dictation-card">
+    <h3>Intermediate Sentences · B1–B2</h3>
+    <p class="dictation-arabic">جمل للمتوسطين — استمع واكتب</p>
+
+    <div class="dictation-sentence">
+      <div class="sentence-num">5</div>
+      <button class="btn-play-small" onclick="speakSentence('Recycling helps reduce the amount of waste that goes to landfill.')" title="Play">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <input class="dictation-input" id="dict-5" placeholder="Type what you hear…">
+      <span class="dictation-reveal" id="reveal-5">Answer: <span class="answer-text">Recycling helps reduce the amount of waste that goes to landfill.</span></span>
+    </div>
+
+    <div class="dictation-sentence">
+      <div class="sentence-num">6</div>
+      <button class="btn-play-small" onclick="speakSentence('Many employees prefer working from home because it saves commuting time.')" title="Play">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <input class="dictation-input" id="dict-6" placeholder="Type what you hear…">
+      <span class="dictation-reveal" id="reveal-6">Answer: <span class="answer-text">Many employees prefer working from home because it saves commuting time.</span></span>
+    </div>
+
+    <div class="dictation-sentence">
+      <div class="sentence-num">7</div>
+      <button class="btn-play-small" onclick="speakSentence('The boundaries between work and personal life often become blurred.')" title="Play">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <input class="dictation-input" id="dict-7" placeholder="Type what you hear…">
+      <span class="dictation-reveal" id="reveal-7">Answer: <span class="answer-text">The boundaries between work and personal life often become blurred.</span></span>
+    </div>
+
+    <button class="btn-check-dict" onclick="checkDictation(['Recycling helps reduce the amount of waste that goes to landfill.','Many employees prefer working from home because it saves commuting time.','The boundaries between work and personal life often become blurred.'], 3, 5)">Check Dictation</button>
+  </div>
+
+</div>
+
+<footer>Listen Up · English Listening Trainer &nbsp;·&nbsp; مدرب مهارة الاستماع</footer>
+
+<script>
+// ── State ─────────────────────────────────────
+let currentUtterance = null;
+let currentSpeed = 0.75;
+let totalCorrect = 0;
+let totalQuestions = 0;
+const answered = {}; // track per-question state
+const STORAGE_KEY = 'listenup_progress_v1';
+const DICT_STORAGE_KEY = 'listenup_dictation_v1';
+
+// ── Persistence ───────────────────────────────
+function saveProgress() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(answered)); } catch (e) {}
+}
+
+function saveDictationEntry(idx, value, correct) {
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(DICT_STORAGE_KEY)) || {}; } catch (e) {}
+  saved[idx] = { value, correct };
+  try { localStorage.setItem(DICT_STORAGE_KEY, JSON.stringify(saved)); } catch (e) {}
+}
+
+function restoreProgress() {
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch (e) { saved = {}; }
+  Object.assign(answered, saved);
+
+  const letters = ['A','B','C','D'];
+  Object.keys(saved).forEach(key => {
+    if (!key.endsWith('_locked') || !saved[key]) return;
+    const qKey = key.slice(0, -('_locked'.length));
+    const chosenLetter = saved[qKey + '_chosen'];
+    const isCorrect = saved[qKey];
+    const options = document.querySelectorAll(`[onclick*="${qKey}"]`);
+    if (!options.length) return;
+    options.forEach(o => o.disabled = true);
+    if (chosenLetter) {
+      const chosenBtn = options[letters.indexOf(chosenLetter)];
+      if (chosenBtn) chosenBtn.classList.add(isCorrect ? 'correct' : 'wrong');
+    }
+    const correctLetter = saved[qKey + '_answer'];
+    if (!isCorrect && correctLetter) {
+      const correctBtn = options[letters.indexOf(correctLetter)];
+      if (correctBtn) correctBtn.classList.add('reveal');
+    }
+    const fb = document.getElementById(`fb-${qKey}`);
+    if (fb) {
+      if (isCorrect) {
+        fb.textContent = '✓ Correct! أحسنت!';
+        fb.className = 'feedback-msg show ok';
+      } else {
+        fb.textContent = correctLetter
+          ? `✗ The correct answer is ${correctLetter}. الإجابة الصحيحة هي ${correctLetter}.`
+          : '✗ Answered previously.';
+        fb.className = 'feedback-msg show err';
+      }
+    }
+  });
+
+  const lessonIds = ['l1','l2','l3','l4','l5','l6','l7','l8','l9','l10','l11','l12','l13','l14','l15'];
+  lessonIds.forEach(lessonId => {
+    let correct = 0, total = 0;
+    Object.keys(saved).forEach(key => {
+      if (key.startsWith(lessonId + 'q') && key.endsWith('_locked') && saved[key]) {
+        total++;
+        const qKey = key.slice(0, -('_locked'.length));
+        if (saved[qKey]) correct++;
+      }
+    });
+    if (total > 0) {
+      const scoreEl = document.getElementById(`score-${lessonId}`);
+      if (scoreEl) {
+        scoreEl.querySelector('.score-num').textContent = `${correct} / ${total}`;
+        scoreEl.classList.add('show');
+      }
+      const checkBtn = document.getElementById(`check-${lessonId}`);
+      if (checkBtn) checkBtn.disabled = true;
+    }
+  });
+
+  updateOverallScore();
+}
+
+function restoreDictation() {
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(DICT_STORAGE_KEY)) || {}; } catch (e) { saved = {}; }
+  Object.keys(saved).forEach(idx => {
+    const input = document.getElementById(`dict-${idx}`);
+    const reveal = document.getElementById(`reveal-${idx}`);
+    if (!input) return;
+    const entry = saved[idx];
+    input.value = entry.value;
+    if (entry.correct) {
+      input.classList.add('correct');
+    } else {
+      input.classList.add('wrong');
+      if (reveal) reveal.classList.add('show');
+    }
+  });
+}
+
+function clearAllProgress() {
+  if (!confirm('This will erase all your saved answers and scores. Continue?\nهذا سيمسح كل إجاباتك المحفوظة. متابعة؟')) return;
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(DICT_STORAGE_KEY);
+  } catch (e) {}
+  location.reload();
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  restoreProgress();
+  restoreDictation();
+});
+
+// ── Speech ────────────────────────────────────
+function stopAll() {
+  if (window.speechSynthesis.speaking || window.speechSynthesis.pending) {
+    window.speechSynthesis.cancel();
+  }
+  document.querySelectorAll('.playing-indicator').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.btn-play svg').forEach(svg => {
+    svg.innerHTML = '<path d="M8 5v14l11-7z"/>';
+  });
+}
+
+function playLesson(btn, textId, indicatorId) {
+  const text = document.getElementById(textId).innerText;
+  const indicator = document.getElementById(indicatorId);
+  const svg = btn.querySelector('svg');
+
+  if (window.speechSynthesis.speaking) {
+    stopAll();
+    return;
+  }
+
+  stopAll();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'en-GB';
+  utter.rate = currentSpeed;
+  utter.pitch = 1;
+
+  utter.onstart = () => {
+    indicator.classList.add('active');
+    svg.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+  };
+  utter.onend = utter.onerror = () => {
+    indicator.classList.remove('active');
+    svg.innerHTML = '<path d="M8 5v14l11-7z"/>';
+  };
+
+  currentUtterance = utter;
+  window.speechSynthesis.speak(utter);
+}
+
+function replayLesson(textId, indicatorId) {
+  stopAll();
+  setTimeout(() => {
+    const btn = document.querySelector(`#${indicatorId}`).previousElementSibling.previousElementSibling;
+    playLesson(btn, textId, indicatorId);
+  }, 100);
+}
+
+function speakSentence(text) {
+  stopAll();
+  setTimeout(() => {
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'en-GB';
+    utter.rate = 0.85;
+    window.speechSynthesis.speak(utter);
+  }, 80);
+}
+
+function setSpeed(val, btn) {
+  currentSpeed = val;
+  btn.closest('.speed-group').querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ── Transcript ────────────────────────────────
+function toggleTranscript(btn) {
+  const textEl = btn.nextElementSibling;
+  const showing = textEl.classList.toggle('visible');
+  btn.innerHTML = showing
+    ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4 6h16M4 12h16M4 18h12"/></svg> Hide Transcript`
+    : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4 6h16M4 12h16M4 18h12"/></svg> Show Transcript`;
+}
+
+// ── Vocabulary ────────────────────────────────
+function toggleVocab(btn) {
+  const box = btn.nextElementSibling;
+  const showing = box.classList.toggle('visible');
+  btn.innerHTML = showing
+    ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 4v16m8-8H4"/></svg> Hide Key Vocabulary`
+    : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 4v16m8-8H4"/></svg> Key Vocabulary · أهم الكلمات`;
+}
+
+// ── Quiz ──────────────────────────────────────
+function selectOption(btn, qKey) {
+  if (answered[qKey + '_locked']) return;
+  const options = btn.closest('.options').querySelectorAll('.option-btn');
+  options.forEach(o => o.classList.remove('selected-pre'));
+  btn.classList.add('selected-pre');
+  btn.dataset.selected = 'true';
+  options.forEach(o => { if (o !== btn) delete o.dataset.selected; });
+}
+
+function checkQuiz(lessonId, correctAnswers, total) {
+  const letters = ['A','B','C','D'];
+  let correct = 0;
+
+  correctAnswers.forEach((ans, i) => {
+    const qKey = `${lessonId}q${i+1}`;
+    if (answered[qKey + '_locked']) { correct += (answered[qKey] ? 1 : 0); return; }
+
+    const options = document.querySelectorAll(`[onclick*="${qKey}"]`);
+    let chosen = null;
+    options.forEach(o => { if (o.dataset.selected) chosen = o; });
+
+    const fb = document.getElementById(`fb-${qKey}`);
+    if (!chosen) return;
+
+    const chosenLetter = letters[Array.from(options).indexOf(chosen)];
+    options.forEach(o => o.disabled = true);
+    answered[qKey + '_locked'] = true;
+    answered[qKey + '_chosen'] = chosenLetter;
+    answered[qKey + '_answer'] = ans;
+
+    if (chosenLetter === ans) {
+      chosen.classList.add('correct');
+      fb.textContent = '✓ Correct! أحسنت!';
+      fb.className = 'feedback-msg show ok';
+      correct++;
+      answered[qKey] = true;
+    } else {
+      chosen.classList.add('wrong');
+      // reveal correct
+      options[letters.indexOf(ans)].classList.add('reveal');
+      fb.textContent = `✗ The correct answer is ${ans}. الإجابة الصحيحة هي ${ans}.`;
+      fb.className = 'feedback-msg show err';
+      answered[qKey] = false;
+    }
+  });
+
+  const scoreEl = document.getElementById(`score-${lessonId}`);
+  const numEl = scoreEl.querySelector('.score-num');
+  numEl.textContent = `${correct} / ${total}`;
+  scoreEl.classList.add('show');
+
+  document.getElementById(`check-${lessonId}`).disabled = true;
+  saveProgress();
+  updateOverallScore();
+}
+
+function resetQuiz(lessonId, total) {
+  const letters = ['A','B','C','D'];
+  for (let i = 1; i <= total; i++) {
+    const qKey = `${lessonId}q${i}`;
+    delete answered[qKey];
+    delete answered[qKey + '_locked'];
+    delete answered[qKey + '_chosen'];
+    delete answered[qKey + '_answer'];
+    const options = document.querySelectorAll(`[onclick*="${qKey}"]`);
+    options.forEach(o => {
+      o.disabled = false;
+      o.classList.remove('correct','wrong','reveal','selected-pre');
+      delete o.dataset.selected;
+    });
+    const fb = document.getElementById(`fb-${qKey}`);
+    if (fb) { fb.className = 'feedback-msg'; fb.textContent = ''; }
+  }
+  const scoreEl = document.getElementById(`score-${lessonId}`);
+  if (scoreEl) scoreEl.classList.remove('show');
+  const checkBtn = document.getElementById(`check-${lessonId}`);
+  if (checkBtn) checkBtn.disabled = false;
+  saveProgress();
+  updateOverallScore();
+}
+
+// ── Dictation ─────────────────────────────────
+function normalise(str) {
+  return str.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, ' ').trim();
+}
+
+function checkDictation(answers, count, startIndex = 1) {
+  let correct = 0;
+  answers.forEach((ans, i) => {
+    const idx = i + startIndex;
+    const input = document.getElementById(`dict-${idx}`);
+    const reveal = document.getElementById(`reveal-${idx}`);
+    if (!input) return;
+    const val = input.value;
+    if (!val.trim()) { reveal.classList.add('show'); return; }
+    if (normalise(val) === normalise(ans)) {
+      input.classList.remove('wrong');
+      input.classList.add('correct');
+      correct++;
+      saveDictationEntry(idx, val, true);
+    } else {
+      input.classList.remove('correct');
+      input.classList.add('wrong');
+      reveal.classList.add('show');
+      saveDictationEntry(idx, val, false);
+    }
+  });
+}
+
+// ── Overall Score ─────────────────────────────
+function updateOverallScore() {
+  let c = 0, t = 0;
+  ['l1','l2','l3','l4','l5','l6','l7','l8','l9','l10','l11','l12','l13','l14','l15'].forEach(id => {
+    const sc = document.getElementById(`score-${id}`);
+    if (sc && sc.classList.contains('show')) {
+      const parts = sc.querySelector('.score-num').textContent.split('/');
+      c += parseInt(parts[0]);
+      t += parseInt(parts[1]);
+    }
+  });
+  const scoreEl = document.getElementById('total-score');
+  scoreEl.innerHTML = `${c}<span>/${t}</span>`;
+  const pct = t > 0 ? Math.round((c/t)*100) : 0;
+  document.getElementById('progress-fill').style.width = pct + '%';
+}
+
+// ── Level Filter ──────────────────────────────
+function filterLevel(level) {
+  document.querySelectorAll('.lvl-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+
+  document.querySelectorAll('.lesson-card').forEach(card => {
+    if (level === 'all' || card.dataset.level === level) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  document.querySelectorAll('.section-title').forEach(t => {
+    if (level === 'all') { t.style.display = ''; return; }
+    const next = t.nextElementSibling;
+    if (next && next.style.display === 'none') {
+      let allHidden = true;
+      let el = t.nextElementSibling;
+      while (el && !el.classList.contains('section-title')) {
+        if (el.classList.contains('lesson-card') && el.style.display !== 'none') { allHidden = false; break; }
+        el = el.nextElementSibling;
+      }
+      t.style.display = allHidden ? 'none' : '';
+    } else {
+      t.style.display = '';
+    }
+  });
+}
+</script>
+</body>
+</html>
